@@ -1,0 +1,23 @@
+{
+  "common": {
+    "siteName": "Superteam Academy",
+    "siteDescription": "Aprenda e construa com Superteam na Solana"
+  },
+  "home": {
+    "getStarted": "Para começar, edite o ficheiro page.tsx.",
+    "lookingFor": "À procura de um ponto de partida ou mais instruções? Visite",
+    "templates": "Modelos",
+    "or": "ou o",
+    "learningCenter": "centro de aprendizagem.",
+    "deployNow": "Implementar agora",
+    "documentation": "Documentação"
+  },
+  "localeSwitcher": {
+    "label": "Idioma",
+    "en": "Inglês",
+    "ptBR": "Português (Brasil)",
+    "es": "Espanhol",
+    "hi": "Hindi",
+    "pt": "Português"
+  }
+}

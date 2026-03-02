@@ -1,0 +1,11 @@
+export { Navbar } from "./navbar";
+export { HeroSection } from "./hero-section";
+export { WhySection } from "./why-section";
+export { FeaturesSection } from "./features-section";
+export { HowItWorksSection } from "./how-it-works";
+export { EcosystemSection } from "./ecosystem";
+export { GainsSection } from "./gains";
+export { AdvantagesSection } from "./advantages";
+export { CommunitySection } from "./community";
+export { CtaBanner } from "./cta-banner";
+export { Footer } from "./footer";

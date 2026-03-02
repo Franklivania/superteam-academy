@@ -1,0 +1,23 @@
+{
+  "common": {
+    "siteName": "Superteam Academy",
+    "siteDescription": "Solana पर Superteam के साथ सीखें और बनाएं"
+  },
+  "home": {
+    "getStarted": "शुरू करने के लिए, page.tsx फ़ाइल संपादित करें।",
+    "lookingFor": "शुरुआती बिंदु या अधिक निर्देश ढूंढ रहे हैं? जाएं",
+    "templates": "टेम्पलेट",
+    "or": "या",
+    "learningCenter": "लर्निंग सेंटर।",
+    "deployNow": "अभी डेप्लॉय करें",
+    "documentation": "दस्तावेज़ीकरण"
+  },
+  "localeSwitcher": {
+    "label": "भाषा",
+    "en": "अंग्रेज़ी",
+    "ptBR": "पुर्तगाली (ब्राज़ील)",
+    "es": "स्पेनिश",
+    "hi": "हिंदी",
+    "pt": "पुर्तगाली"
+  }
+}

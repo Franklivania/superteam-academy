@@ -1,0 +1,381 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Local fonts from /public/fonts */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter/static/Inter_18pt-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter/static/Inter_18pt-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter/static/Inter_18pt-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter/static/Inter_18pt-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/Archivo/static/Archivo-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/Archivo/static/Archivo-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/Archivo/static/Archivo-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/Archivo/static/Archivo-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-inter: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-archivo: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  /* Responsive type scale (fluid) */
+  --text-h1: clamp(2rem, 5vw + 1rem, 3.5rem);
+  --text-h2: clamp(1.75rem, 4vw + 0.75rem, 2.5rem);
+  --text-h3: clamp(1.5rem, 3vw + 0.5rem, 2rem);
+  --text-h4: clamp(1.25rem, 2.5vw + 0.5rem, 1.5rem);
+  --text-h5: clamp(1.125rem, 2vw + 0.25rem, 1.25rem);
+  --text-h6: clamp(1rem, 1.5vw + 0.25rem, 1.125rem);
+  --text-body: clamp(0.9375rem, 1vw + 0.5rem, 1rem);
+  --text-small: 0.875rem;
+  --text-caption: 0.75rem;
+  --leading-tight: 1.2;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  /* Expose type scale to Tailwind utilities (text-h1, text-body, etc.) */
+  --font-size-h1: var(--text-h1);
+  --font-size-h2: var(--text-h2);
+  --font-size-h3: var(--text-h3);
+  --font-size-h4: var(--text-h4);
+  --font-size-h5: var(--text-h5);
+  --font-size-h6: var(--text-h6);
+  --font-size-body: var(--text-body);
+  --font-size-small: var(--text-small);
+  --font-size-caption: var(--text-caption);
+  --line-height-h1: var(--leading-tight);
+  --line-height-h2: var(--leading-tight);
+  --line-height-h3: var(--leading-snug);
+  --line-height-h4: var(--leading-snug);
+  --line-height-h5: var(--leading-snug);
+  --line-height-h6: var(--leading-normal);
+  --line-height-body: var(--leading-relaxed);
+  --line-height-small: var(--leading-normal);
+  --line-height-caption: var(--leading-normal);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  /* Landing flat design tokens */
+  --shadow-flat: 4px 4px 0px #1b231d;
+  --shadow-flat-lg: 6px 6px 0px #1b231d;
+  --shadow-flat-xl: 8px 8px 0px #1b231d;
+  --shadow-flat-yellow: 4px 4px 0px rgba(255, 210, 63, 0.3);
+  --shadow-flat-yellow-lg: 6px 6px 0px rgba(255, 210, 63, 0.3);
+  --color-near-black: #1b231d;
+  --color-cream: #f7eacb;
+  --color-green: #008c4c;
+  --color-dark-green: #2f6b3f;
+  --color-yellow: #ffd23f;
+  --color-surface: #f5f0e4;
+  --color-surface-card: var(--color-cream);
+  --color-surface-alt: #eee5c8;
+  --color-surface-dark: #111a14;
+  --color-surface-dark-card: #1a2620;
+  --color-surface-dark-alt: #151e17;
+  --color-nav-bg: #f7eacb;
+  /* Code editor / UI in features */
+  --color-code-panel: #1a2a1e;
+  --color-code-tab: #1a3a2a;
+  --color-code-text: #7ec8a0;
+  --color-code-string: #98e88f;
+  --color-code-muted: #7a9a82;
+  /* Tier badges (credentials) */
+  --color-tier-protocol: #a07aff;
+  --color-tier-bronze: #cd7f32;
+  --color-tier-silver: #8a9a8e;
+}
+
+/* Landing palette: #f5f0e4 bg, #f7eacb cream card, #eee5c8 alt, #1b231d near-black, #008c4c green, #ffd23f yellow, #2f6b3f dark-green, #3a4a3e muted */
+:root {
+  --radius: 8px;
+  /* Light theme – warm beige bg (not white), cream cards, relational to HTML [data-theme="light"] */
+  --background: #f5f0e4;
+  --foreground: #1b231d;
+  --card: #f7eacb;
+  --card-foreground: #1b231d;
+  --popover: #f7eacb;
+  --popover-foreground: #1b231d;
+  --primary: #008c4c;
+  --primary-foreground: #ffffff;
+  --secondary: #eee5c8;
+  --secondary-foreground: #1b231d;
+  --muted: #eee5c8;
+  --muted-foreground: #3a4a3e;
+  --accent: #ffd23f;
+  --accent-foreground: #1b231d;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #1b231d;
+  --input: #1b231d;
+  --ring: #008c4c;
+  /* Bento card colours (app palette – Chorke-style) */
+  --bento-yellow: oklch(0.92 0.12 95);
+  --bento-green: oklch(0.75 0.14 155);
+  --bento-mint: oklch(0.85 0.1 165);
+  --bento-pink: oklch(0.88 0.08 350);
+  --chart-1: oklch(0.52 0.165 155);
+  --chart-2: oklch(0.875 0.165 95.5);
+  --chart-3: oklch(0.38 0.095 152);
+  --chart-4: oklch(0.88 0.08 102);
+  --chart-5: oklch(0.195 0.02 155);
+  --sidebar: oklch(0.92 0.045 102);
+  --sidebar-foreground: oklch(0.195 0.02 155);
+  --sidebar-primary: oklch(0.52 0.165 155);
+  --sidebar-primary-foreground: oklch(0.98 0.02 102);
+  --sidebar-accent: oklch(0.88 0.08 102);
+  --sidebar-accent-foreground: oklch(0.38 0.095 152);
+  --sidebar-border: oklch(0.85 0.06 152);
+  --sidebar-ring: oklch(0.52 0.165 155);
+}
+
+.dark {
+  /* Dark theme – #111a14 bg, #1a2620 card, #151e17 alt, relational to HTML [data-theme="dark"] */
+  --color-nav-bg: #131c15;
+  --color-surface-dark: #0d1510;
+  --background: #111a14;
+  --foreground: #e8f0ea;
+  --card: #1a2620;
+  --card-foreground: #e8f0ea;
+  --popover: #1a2620;
+  --popover-foreground: #e8f0ea;
+  --primary: #008c4c;
+  --primary-foreground: #ffffff;
+  --secondary: #151e17;
+  --secondary-foreground: #e8f0ea;
+  --muted: #151e17;
+  --muted-foreground: #9ab5a0;
+  --accent: #ffd23f;
+  --accent-foreground: #1b231d;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: #2a3d2e;
+  --input: #2a3d2e;
+  --ring: #008c4c;
+  /* Bento cards: vibrant app colours on black */
+  --bento-yellow: oklch(0.88 0.16 95);
+  --bento-green: oklch(0.65 0.18 155);
+  --bento-mint: oklch(0.78 0.12 165);
+  --bento-pink: oklch(0.82 0.1 350);
+  --chart-1: oklch(0.52 0.165 155);
+  --chart-2: oklch(0.875 0.165 95.5);
+  --chart-3: oklch(0.38 0.095 152);
+  --chart-4: oklch(0.75 0.06 102);
+  --chart-5: oklch(0.935 0.055 102);
+  --sidebar: oklch(0.12 0.008 264);
+  --sidebar-foreground: oklch(0.97 0.005 264);
+  --sidebar-primary: oklch(0.52 0.165 155);
+  --sidebar-primary-foreground: oklch(0.98 0.02 102);
+  --sidebar-accent: oklch(0.22 0.01 264);
+  --sidebar-accent-foreground: oklch(0.97 0.005 264);
+  --sidebar-border: oklch(0.28 0.01 264);
+  --sidebar-ring: oklch(0.52 0.165 155);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    font-family: var(--font-inter);
+    font-size: var(--text-body);
+    line-height: var(--leading-relaxed);
+    @apply bg-background text-foreground antialiased;
+  }
+  /* Heading scale: Archivo, responsive fluid sizes */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-archivo);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    @apply text-foreground tracking-tight;
+  }
+  h1 {
+    font-size: var(--text-h1);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    font-size: var(--text-h2);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+  h3 {
+    font-size: var(--text-h3);
+  }
+  h4 {
+    font-size: var(--text-h4);
+  }
+  h5 {
+    font-size: var(--text-h5);
+  }
+  h6 {
+    font-size: var(--text-h6);
+    font-weight: 600;
+  }
+  p {
+    font-size: var(--text-body);
+    line-height: var(--leading-relaxed);
+    @apply text-foreground;
+  }
+  small {
+    font-size: var(--text-small);
+    line-height: var(--leading-normal);
+    @apply text-muted-foreground;
+  }
+  /* Use class "caption" or "text-caption" for caption-style text */
+  .caption {
+    font-size: var(--text-caption);
+    line-height: var(--leading-normal);
+    @apply text-muted-foreground;
+  }
+}
+
+/* Typography utility classes: use on any element (e.g. <span className="text-h1">) */
+@layer components {
+  .text-h1 {
+    font-family: var(--font-archivo);
+    font-size: var(--text-h1);
+    font-weight: 700;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.02em;
+    @apply text-foreground tracking-tight;
+  }
+  .text-h2 {
+    font-family: var(--font-archivo);
+    font-size: var(--text-h2);
+    font-weight: 700;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.015em;
+    @apply text-foreground tracking-tight;
+  }
+  .text-h3 {
+    font-family: var(--font-archivo);
+    font-size: var(--text-h3);
+    font-weight: 600;
+    line-height: var(--leading-snug);
+    @apply text-foreground tracking-tight;
+  }
+  .text-h4 {
+    font-family: var(--font-archivo);
+    font-size: var(--text-h4);
+    font-weight: 600;
+    line-height: var(--leading-snug);
+    @apply text-foreground tracking-tight;
+  }
+  .text-h5 {
+    font-family: var(--font-archivo);
+    font-size: var(--text-h5);
+    font-weight: 600;
+    line-height: var(--leading-snug);
+    @apply text-foreground tracking-tight;
+  }
+  .text-h6 {
+    font-family: var(--font-archivo);
+    font-size: var(--text-h6);
+    font-weight: 600;
+    line-height: var(--leading-normal);
+    @apply text-foreground tracking-tight;
+  }
+  .text-body {
+    font-size: var(--text-body);
+    line-height: var(--leading-relaxed);
+    @apply text-foreground;
+  }
+  .text-small {
+    font-size: var(--text-small);
+    line-height: var(--leading-normal);
+    @apply text-muted-foreground;
+  }
+  .text-caption {
+    font-size: var(--text-caption);
+    line-height: var(--leading-normal);
+    @apply text-muted-foreground;
+  }
+  /* Raised bento/card: rounded, shadow, not flat */
+  .bento {
+    @apply rounded-2xl bg-card text-card-foreground shadow-[0_8px_30px_rgba(0,0,0,0.12)];
+  }
+  .dark .bento {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+}
