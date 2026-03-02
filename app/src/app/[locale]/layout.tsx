@@ -5,6 +5,8 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { PostHogProvider } from "@/components/providers/posthog-provider";
+import { PostHogPageView } from "@/components/providers/posthog-provider";
 import { LocaleLang } from "@/components/layout/locale-lang";
 import { routing } from "@/i18n/routing";
 
@@ -38,7 +40,12 @@ export default async function LocaleLayout({ children, params }: Props): Promise
     <>
       <LocaleLang locale={locale} />
       <NextIntlClientProvider messages={messages}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <PostHogProvider>
+        <ThemeProvider>
+          <PostHogPageView />
+          {children}
+        </ThemeProvider>
+      </PostHogProvider>
       </NextIntlClientProvider>
     </>
   );

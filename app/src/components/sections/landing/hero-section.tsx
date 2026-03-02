@@ -48,10 +48,10 @@ export function HeroSection({ content }: HeroSectionProps) {
           </FadeUp>
           <FadeUp delay={0.2}>
             <div className="flex gap-4 flex-wrap">
-              <FlatButton href="#features" variant="primary" size="lg">
+              <FlatButton href="/login" variant="primary" size="lg">
                 {content.ctaPrimary} →
               </FlatButton>
-              <FlatButton href="#features" variant="outline" size="lg">
+              <FlatButton href="/courses" variant="outline" size="lg">
                 {content.ctaSecondary}
               </FlatButton>
             </div>

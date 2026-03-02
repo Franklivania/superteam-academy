@@ -108,7 +108,7 @@ export function Navbar({ content }: NavbarProps) {
             </svg>
           )}
         </button>
-        <FlatButton href="#cta" variant="primary" size="md">
+        <FlatButton href="/login" variant="primary" size="md">
           {content.startLearning}
         </FlatButton>
       </div>

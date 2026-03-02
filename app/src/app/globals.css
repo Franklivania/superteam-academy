@@ -168,6 +168,12 @@
   --color-tier-silver: #8a9a8e;
 }
 
+/* Smooth scroll for in-page anchor links (nav, CTAs) */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* leave room for fixed navbar (h-16) */
+}
+
 /* Landing palette: #f5f0e4 bg, #f7eacb cream card, #eee5c8 alt, #1b231d near-black, #008c4c green, #ffd23f yellow, #2f6b3f dark-green, #3a4a3e muted */
 :root {
   --radius: 8px;
@@ -260,6 +266,7 @@
     font-family: var(--font-inter);
     font-size: var(--text-body);
     line-height: var(--leading-relaxed);
+    scroll-behavior: smooth;
     @apply bg-background text-foreground antialiased;
   }
   /* Heading scale: Archivo, responsive fluid sizes */

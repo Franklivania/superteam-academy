@@ -22,7 +22,7 @@ export function HowItWorksSection({ content }: HowItWorksSectionProps) {
         </h2>
 
         <div className="relative mt-12">
-          <div className="absolute top-12 left-[10%] right-[10%] h-0.5 border-t-2 border-dashed border-primary dark:border-accent z-0 hidden md:block" />
+          <div className="absolute top-18 left-[10%] right-[10%] h-0.5 border-t-2 border-dashed border-primary dark:border-accent z-0 hidden md:block" />
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 relative z-10"
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}

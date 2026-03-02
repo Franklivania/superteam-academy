@@ -1,5 +1,5 @@
 import React from "react";
-import type { LandingContent } from "@/lib/types/landing";
+import type { FooterContent, LandingContent, NavContent } from "@/lib/types/landing";
 import { landingContentPtBR, landingContentEs, landingContentHi, landingContentPt } from "./content-locales";
 
 function headlineEn(): React.ReactNode {
@@ -267,4 +267,12 @@ const contentByLocale: Record<string, LandingContent> = {
  */
 export function getLandingContent(locale: string): LandingContent {
   return contentByLocale[locale] ?? landingContentEn;
+}
+
+export type WebLayoutContent = { nav: NavContent; footer: FooterContent };
+
+/** Nav + footer only, for (web) layout. */
+export function getWebLayoutContent(locale: string): WebLayoutContent {
+  const full = getLandingContent(locale);
+  return { nav: full.nav, footer: full.footer };
 }
