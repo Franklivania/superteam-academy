@@ -53,7 +53,7 @@ export function Navbar({ content }: NavbarProps) {
       <ul className="hidden md:flex items-center gap-8 list-none">
         <li>
           <Link
-            href="#why"
+            href="/#why"
             className="font-mono text-xs font-medium text-muted-foreground hover:text-primary dark:hover:text-accent no-underline tracking-wide uppercase transition-colors duration-150"
           >
             {content.about}
@@ -61,7 +61,7 @@ export function Navbar({ content }: NavbarProps) {
         </li>
         <li>
           <Link
-            href="#features"
+            href="/#features"
             className="font-mono text-xs font-medium text-muted-foreground hover:text-primary dark:hover:text-accent no-underline tracking-wide uppercase transition-colors duration-150"
           >
             {content.platform}
@@ -69,7 +69,7 @@ export function Navbar({ content }: NavbarProps) {
         </li>
         <li>
           <Link
-            href="#how"
+            href="/#how"
             className="font-mono text-xs font-medium text-muted-foreground hover:text-primary dark:hover:text-accent no-underline tracking-wide uppercase transition-colors duration-150"
           >
             {content.howItWorks}
@@ -77,7 +77,7 @@ export function Navbar({ content }: NavbarProps) {
         </li>
         <li>
           <Link
-            href="#community"
+            href="/#community"
             className="font-mono text-xs font-medium text-muted-foreground hover:text-primary dark:hover:text-accent no-underline tracking-wide uppercase transition-colors duration-150"
           >
             {content.community}

@@ -1,7 +1,15 @@
 {
   "common": {
     "siteName": "Superteam Academy",
-    "siteDescription": "Solana पर Superteam के साथ सीखें और बनाएं"
+    "siteDescription": "Solana पर Superteam के साथ सीखें और बनाएं",
+    "loading": "लोड हो रहा है...",
+    "error": "कुछ गलत हो गया",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "submit": "जमा करें",
+    "search": "खोजें",
+    "filter": "फ़िल्टर",
+    "sort": "क्रमबद्ध करें"
   },
   "home": {
     "getStarted": "शुरू करने के लिए, page.tsx फ़ाइल संपादित करें।",
@@ -19,5 +27,90 @@
     "es": "स्पेनिश",
     "hi": "हिंदी",
     "pt": "पुर्तगाली"
+  },
+  "auth": {
+    "login": "लॉग इन करें",
+    "register": "रजिस्टर करें",
+    "logout": "लॉग आउट",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "name": "नाम",
+    "confirmPassword": "पासवर्ड की पुष्टि करें",
+    "loginTitle": "अपने खाते में लॉग इन करें",
+    "registerTitle": "खाता बनाएं",
+    "loginWithGoogle": "Google के साथ जारी रखें",
+    "loginWithGitHub": "GitHub के साथ जारी रखें",
+    "connectWallet": "वॉलेट कनेक्ट करें",
+    "walletLinked": "वॉलेट सफलतापूर्वक जुड़ गया",
+    "invalidEmail": "अमान्य ईमेल",
+    "passwordMinLength": "पासवर्ड कम से कम 8 अक्षर का होना चाहिए",
+    "passwordsDoNotMatch": "पासवर्ड मेल नहीं खाते",
+    "validationError": "कृपया ऊपर की त्रुटियाँ ठीक करें"
+  },
+  "courses": {
+    "title": "कोर्स",
+    "searchPlaceholder": "कोर्स खोजें...",
+    "filterByDifficulty": "कठिनाई के अनुसार फ़िल्टर करें",
+    "sortBy": "क्रमबद्ध करें",
+    "sortDate": "तारीख",
+    "sortXp": "XP",
+    "sortDuration": "अवधि",
+    "enroll": "नामांकन करें",
+    "enrolled": "नामांकित",
+    "enrollmentSuccess": "नामांकन सफल",
+    "enrollmentError": "नामांकन विफल। पहले अपना वॉलेट कनेक्ट करें।",
+    "noCourses": "कोई कोर्स नहीं मिला",
+    "lessons": "पाठ",
+    "modules": "मॉड्यूल"
+  },
+  "challenges": {
+    "title": "चुनौतियाँ",
+    "titleColumn": "शीर्षक",
+    "difficulty": "कठिनाई",
+    "easy": "आसान",
+    "medium": "मध्यम",
+    "hard": "कठिन",
+    "hell": "बहुत कठिन",
+    "xpReward": "XP",
+    "attempts": "प्रयास",
+    "status": "स्थिति",
+    "createdAt": "बनाया गया",
+    "runTests": "टेस्ट चलाएं",
+    "submit": "समाधान जमा करें",
+    "submitSuccess": "चुनौती पूरी हुई!",
+    "passed": "पास",
+    "failed": "फेल",
+    "toggleEditor": "एडिटर टॉगल करें",
+    "noChallenges": "कोई चुनौती नहीं मिली"
+  },
+  "dashboard": {
+    "title": "डैशबोर्ड",
+    "xpProgress": "XP प्रगति",
+    "level": "स्तर",
+    "streak": "सीरीज़",
+    "streakDays": "{count} दिन",
+    "leaderboardRank": "लीडरबोर्ड रैंक",
+    "recentActivity": "हाल की गतिविधि",
+    "enrollments": "नामांकन",
+    "credentials": "क्रेडेंशियल"
+  },
+  "leaderboard": {
+    "title": "लीडरबोर्ड",
+    "weekly": "साप्ताहिक",
+    "monthly": "मासिक",
+    "allTime": "सभी समय",
+    "searchByUsername": "उपयोगकर्ता नाम से खोजें",
+    "rank": "रैंक",
+    "user": "उपयोगकर्ता",
+    "xp": "XP",
+    "level": "स्तर",
+    "noResults": "कोई परिणाम नहीं"
+  },
+  "lesson": {
+    "title": "पाठ",
+    "complete": "पूर्ण के रूप में चिह्नित करें",
+    "completed": "पूर्ण",
+    "runCode": "कोड चलाएं",
+    "moduleComplete": "मॉड्यूल पूर्ण!"
   }
 }

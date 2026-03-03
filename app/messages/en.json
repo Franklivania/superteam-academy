@@ -1,7 +1,15 @@
 {
   "common": {
     "siteName": "Superteam Academy",
-    "siteDescription": "Learn and build with Superteam on Solana"
+    "siteDescription": "Learn and build with Superteam on Solana",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort"
   },
   "home": {
     "getStarted": "To get started, edit the page.tsx file.",
@@ -19,5 +27,90 @@
     "es": "Spanish",
     "hi": "Hindi",
     "pt": "Portuguese"
+  },
+  "auth": {
+    "login": "Log in",
+    "register": "Register",
+    "logout": "Log out",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "confirmPassword": "Confirm password",
+    "loginTitle": "Log in to your account",
+    "registerTitle": "Create an account",
+    "loginWithGoogle": "Continue with Google",
+    "loginWithGitHub": "Continue with GitHub",
+    "connectWallet": "Connect wallet",
+    "walletLinked": "Wallet linked successfully",
+    "invalidEmail": "Invalid email",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "validationError": "Please fix the errors above"
+  },
+  "courses": {
+    "title": "Courses",
+    "searchPlaceholder": "Search courses...",
+    "filterByDifficulty": "Filter by difficulty",
+    "sortBy": "Sort by",
+    "sortDate": "Date",
+    "sortXp": "XP reward",
+    "sortDuration": "Duration",
+    "enroll": "Enroll",
+    "enrolled": "Enrolled",
+    "enrollmentSuccess": "Enrollment successful",
+    "enrollmentError": "Enrollment failed. Connect your wallet first.",
+    "noCourses": "No courses found",
+    "lessons": "Lessons",
+    "modules": "Modules"
+  },
+  "challenges": {
+    "title": "Challenges",
+    "titleColumn": "Title",
+    "difficulty": "Difficulty",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "hell": "Hell",
+    "xpReward": "XP reward",
+    "attempts": "Attempts",
+    "status": "Status",
+    "createdAt": "Created at",
+    "runTests": "Run tests",
+    "submit": "Submit solution",
+    "submitSuccess": "Challenge completed!",
+    "passed": "Passed",
+    "failed": "Failed",
+    "toggleEditor": "Toggle editor",
+    "noChallenges": "No challenges found"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "xpProgress": "XP progress",
+    "level": "Level",
+    "streak": "Streak",
+    "streakDays": "{count} days",
+    "leaderboardRank": "Leaderboard rank",
+    "recentActivity": "Recent activity",
+    "enrollments": "Enrollments",
+    "credentials": "Credentials"
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "allTime": "All time",
+    "searchByUsername": "Search by username",
+    "rank": "Rank",
+    "user": "User",
+    "xp": "XP",
+    "level": "Level",
+    "noResults": "No results"
+  },
+  "lesson": {
+    "title": "Lesson",
+    "complete": "Mark complete",
+    "completed": "Completed",
+    "runCode": "Run code",
+    "moduleComplete": "Module completed!"
   }
 }

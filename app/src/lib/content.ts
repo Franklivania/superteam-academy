@@ -219,18 +219,18 @@ export const landingContentEn: LandingContent = {
       {
         title: "Platform",
         links: [
-          { label: "Courses" },
-          { label: "Leaderboard" },
-          { label: "Dashboard" },
-          { label: "Certificates" },
+          { label: "Courses", href: "/courses" },
+          { label: "Leaderboard", href: "/leaderboard" },
+          { label: "Dashboard", href: "/dashboard" },
+          { label: "Certificates", href: "/certificates" },
         ],
       },
       {
         title: "Account",
         links: [
-          { label: "Sign In" },
-          { label: "Register" },
-          { label: "Settings" },
+          { label: "Sign In", href: "/login" },
+          { label: "Register", href: "/register" },
+          { label: "Settings", href: "/settings" },
         ],
       },
       {

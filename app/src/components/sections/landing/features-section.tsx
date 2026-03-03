@@ -125,12 +125,12 @@ export function FeaturesSection({ content }: FeaturesSectionProps) {
                     className={cn(
                       "flex-1 min-w-[80px] py-1.5 px-2 border-2 rounded-lg text-center font-mono text-[0.6rem] transition-colors",
                       tier.variant === "protocol"
-                        ? "bg-(--color-tier-protocol)/10 text-(--color-tier-protocol) border-(--color-tier-protocol)/30"
+                        ? "bg-tier-protocol/10 text-tier-protocol border-tier-protocol/30"
                         : i === 0
-                          ? "bg-(--color-tier-bronze)/10 text-(--color-tier-bronze) border-border"
+                          ? "bg-tier-bronze/10 text-tier-bronze border-border"
                           : i === 1
-                            ? "bg-(--color-tier-silver)/10 text-(--color-tier-silver) border-border"
-                            : "bg-(--color-yellow) text-foreground border-border"
+                            ? "bg-tier-silver/10 text-tier-silver border-border"
+                            : "bg-yellow text-foreground dark:text-background border-border"
                     )}
                     whileHover={{ scale: 1.02 }}
                   >
@@ -145,15 +145,15 @@ export function FeaturesSection({ content }: FeaturesSectionProps) {
 
           <motion.div variants={itemVariants} className="md:col-span-3">
             <BentoCard accent="yellow" className="bg-accent border-border text-accent-foreground w-full">
-              <h3 className="[font-family:var(--font-archivo)] font-bold text-lg mb-2">{content.gamified.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{content.gamified.desc}</p>
+              <h3 className="[font-family:var(--font-archivo)] font-bold text-foreground dark:text-background text-lg mb-2">{content.gamified.title}</h3>
+              <p className="text-sm text-muted-foreground dark:text-black leading-relaxed">{content.gamified.desc}</p>
               <div className="mt-4 flex gap-2 items-center">
-                <Flame className="size-6 text-foreground" strokeWidth={1.5} />
+                <Flame className="size-6 text-foreground dark:text-background" strokeWidth={1.5} />
                 <div>
-                  <div className="[font-family:var(--font-archivo)] font-extrabold text-foreground text-lg">{content.gamified.currentStreak}</div>
-                  <div className="font-mono text-[0.6rem] text-muted-foreground">{content.gamified.streakLabel}</div>
+                  <div className="[font-family:var(--font-archivo)] font-extrabold text-foreground dark:text-background text-lg">{content.gamified.currentStreak}</div>
+                  <div className="font-mono text-[0.6rem] text-muted-foreground dark:text-black">{content.gamified.streakLabel}</div>
                 </div>
-                <Trophy className="size-6 text-foreground ml-auto" strokeWidth={1.5} />
+                <Trophy className="size-6 text-foreground dark:text-background ml-auto" strokeWidth={1.5} />
               </div>
             </BentoCard>
           </motion.div>

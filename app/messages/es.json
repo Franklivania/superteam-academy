@@ -1,7 +1,15 @@
 {
   "common": {
     "siteName": "Superteam Academy",
-    "siteDescription": "Aprende y construye con Superteam en Solana"
+    "siteDescription": "Aprende y construye con Superteam en Solana",
+    "loading": "Cargando...",
+    "error": "Algo salió mal",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "submit": "Enviar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar"
   },
   "home": {
     "getStarted": "Para empezar, edita el archivo page.tsx.",
@@ -19,5 +27,90 @@
     "es": "Español",
     "hi": "Hindi",
     "pt": "Portugués"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "name": "Nombre",
+    "confirmPassword": "Confirmar contraseña",
+    "loginTitle": "Inicia sesión en tu cuenta",
+    "registerTitle": "Crear una cuenta",
+    "loginWithGoogle": "Continuar con Google",
+    "loginWithGitHub": "Continuar con GitHub",
+    "connectWallet": "Conectar wallet",
+    "walletLinked": "Wallet conectada correctamente",
+    "invalidEmail": "Correo electrónico no válido",
+    "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
+    "passwordsDoNotMatch": "Las contraseñas no coinciden",
+    "validationError": "Corrige los errores anteriores"
+  },
+  "courses": {
+    "title": "Cursos",
+    "searchPlaceholder": "Buscar cursos...",
+    "filterByDifficulty": "Filtrar por dificultad",
+    "sortBy": "Ordenar por",
+    "sortDate": "Fecha",
+    "sortXp": "XP",
+    "sortDuration": "Duración",
+    "enroll": "Inscribirse",
+    "enrolled": "Inscrito",
+    "enrollmentSuccess": "Inscripción exitosa",
+    "enrollmentError": "Error al inscribirse. Conecta tu wallet primero.",
+    "noCourses": "No se encontraron cursos",
+    "lessons": "Lecciones",
+    "modules": "Módulos"
+  },
+  "challenges": {
+    "title": "Desafíos",
+    "titleColumn": "Título",
+    "difficulty": "Dificultad",
+    "easy": "Fácil",
+    "medium": "Medio",
+    "hard": "Difícil",
+    "hell": "Inferno",
+    "xpReward": "XP",
+    "attempts": "Intentos",
+    "status": "Estado",
+    "createdAt": "Creado el",
+    "runTests": "Ejecutar pruebas",
+    "submit": "Enviar solución",
+    "submitSuccess": "¡Desafío completado!",
+    "passed": "Aprobado",
+    "failed": "Fallido",
+    "toggleEditor": "Alternar editor",
+    "noChallenges": "No se encontraron desafíos"
+  },
+  "dashboard": {
+    "title": "Panel",
+    "xpProgress": "Progreso de XP",
+    "level": "Nivel",
+    "streak": "Racha",
+    "streakDays": "{count} días",
+    "leaderboardRank": "Posición en el ranking",
+    "recentActivity": "Actividad reciente",
+    "enrollments": "Inscripciones",
+    "credentials": "Credenciales"
+  },
+  "leaderboard": {
+    "title": "Ranking",
+    "weekly": "Semanal",
+    "monthly": "Mensual",
+    "allTime": "Todo el tiempo",
+    "searchByUsername": "Buscar por nombre de usuario",
+    "rank": "Posición",
+    "user": "Usuario",
+    "xp": "XP",
+    "level": "Nivel",
+    "noResults": "Sin resultados"
+  },
+  "lesson": {
+    "title": "Lección",
+    "complete": "Marcar como completada",
+    "completed": "Completada",
+    "runCode": "Ejecutar código",
+    "moduleComplete": "¡Módulo completado!"
   }
 }
