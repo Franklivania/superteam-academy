@@ -7,6 +7,7 @@ export type NavContent = {
   community: string;
   startLearning: string;
   toggleTheme: string;
+  dashboard: string;
 };
 
 export type HeroContent = {

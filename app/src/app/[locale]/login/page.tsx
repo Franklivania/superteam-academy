@@ -41,7 +41,7 @@ function LoginPageInner(): React.ReactElement {
   const locale = useLocale();
   const router = useRouter();
   const search_params = useSearchParams();
-  const callback_url = search_params.get("callbackUrl") ?? `/${locale}/dashboard`;
+  const callback_url = search_params.get("callbackUrl") ?? "/dashboard";
   const oauth_error = search_params.get("error");
   const set_session = useAuthStore((s: AuthState) => s.set_session);
 

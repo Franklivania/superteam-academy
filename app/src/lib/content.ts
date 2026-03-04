@@ -23,10 +23,11 @@ export const landingContentEn: LandingContent = {
     community: "Community",
     startLearning: "Start Learning",
     toggleTheme: "Toggle theme",
+    dashboard: "Dashboard",
   },
   hero: {
     layout: "split-horizontal",
-    tag: "Superteam Brasil · Solana Education",
+    tag: "Superteam Brasil · Solana Education · Open Source",
     headline: headlineEn(),
     subheading: "Superteam Brasil delivers structured, interactive education designed to move builders from fundamentals to protocol-level competence — with on-chain verification built in.",
     pills: ["Project-Based Courses", "Coding Challenges", "On-Chain Credentials"],

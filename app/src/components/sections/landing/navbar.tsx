@@ -8,6 +8,7 @@ import { FlatButton } from "@/components/ui/flat-button";
 import type { NavContent } from "@/lib/types/landing";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { useAuthStore, type AuthState } from "@/store/auth-store";
 
 interface NavbarProps {
   content: NavContent;
@@ -16,6 +17,7 @@ interface NavbarProps {
 export function Navbar({ content }: NavbarProps) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const session = useAuthStore((s: AuthState) => s.session);
   useEffect(() => {
     const id = window.setTimeout(() => setMounted(true), 0);
     return () => window.clearTimeout(id);
@@ -127,9 +129,15 @@ export function Navbar({ content }: NavbarProps) {
             </svg>
           )}
         </button>
-        <FlatButton href="/login" variant="primary" size="md">
-          {content.startLearning}
-        </FlatButton>
+        {session ? (
+          <FlatButton href="/dashboard" variant="outline" size="md">
+            {content.dashboard}
+          </FlatButton>
+        ) : (
+          <FlatButton href="/login" variant="primary" size="md">
+            {content.startLearning}
+          </FlatButton>
+        )}
       </div>
     </nav>
   );

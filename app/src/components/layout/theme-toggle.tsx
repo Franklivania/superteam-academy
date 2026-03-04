@@ -33,7 +33,7 @@ export function ThemeToggle(): React.ReactElement {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" aria-label={t("theme")}>
+        <Button variant="outline" size="icon" className="rounded-none border-2" aria-label={t("theme")}>
           {theme === "dark" ? <MoonIcon className="size-4" /> : <SunIcon className="size-4" />}
         </Button>
       </DropdownMenuTrigger>
