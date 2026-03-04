@@ -16,6 +16,7 @@
     "@coral-xyz/anchor": "^0.32.1",
     "@monaco-editor/react": "^4.7.0",
     "@neondatabase/serverless": "^1.0.2",
+    "@portabletext/react": "^6.0.3",
     "@sanity/client": "^7.16.0",
     "@sentry/nextjs": "^10.42.0",
     "@solana/spl-token": "^0.4.14",

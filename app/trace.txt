@@ -1,0 +1,22 @@
+[dotenv@17.3.1] injecting env (0) from .env.local -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+Caught error: 71 |     constructor(idl, idlAccount, programId, provider, coder) {
+72 |         this._idlAccount = idlAccount;
+73 |         this._programId = programId;
+74 |         this._provider = provider !== null && provider !== void 0 ? provider : (0, provider_js_1.getProvider)();
+75 |         this._coder = coder !== null && coder !== void 0 ? coder : new index_js_1.BorshCoder(idl);
+76 |         this._size = this._coder.accounts.size(idlAccount.name);
+                                      ^
+TypeError: undefined is not an object (evaluating 'this._coder.accounts.size')
+      at new AccountClient (C:\Users\chibu\Desktop\hackathon\superteam-academy\app\node_modules\@coral-xyz\anchor\dist\cjs\program\namespace\account.js:76:34)
+      at <anonymous> (C:\Users\chibu\Desktop\hackathon\superteam-academy\app\node_modules\@coral-xyz\anchor\dist\cjs\program\namespace\account.js:40:36)
+      at reduce (1:11)
+      at build (C:\Users\chibu\Desktop\hackathon\superteam-academy\app\node_modules\@coral-xyz\anchor\dist\cjs\program\namespace\index.js:32:36)
+      at new Program (C:\Users\chibu\Desktop\hackathon\superteam-academy\app\node_modules\@coral-xyz\anchor\dist\cjs\program\index.js:111:103)
+      at get_program (C:\Users\chibu\Desktop\hackathon\superteam-academy\app\src\lib\services\academy-client.ts:129:10)
+      at academy_build_enroll_tx (C:\Users\chibu\Desktop\hackathon\superteam-academy\app\src\lib\services\academy-client.ts:201:19)
+      at academy_build_enroll_tx (C:\Users\chibu\Desktop\hackathon\superteam-academy\app\src\lib\services\academy-client.ts:200:47)
+      at run (C:\Users\chibu\Desktop\hackathon\superteam-academy\app\test.ts:6:22)
+      at run (C:\Users\chibu\Desktop\hackathon\superteam-academy\app\test.ts:4:22)
+      at <anonymous> (C:\Users\chibu\Desktop\hackathon\superteam-academy\app\test.ts:16:1)
+

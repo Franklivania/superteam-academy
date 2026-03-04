@@ -137,7 +137,7 @@ export function ChallengeDetailView({ challenge_id }: { challenge_id: string }) 
 
   return (
     <div className="w-full mx-auto flex flex-col h-full lg:h-[80vh] lg:flex-row lg:items-start">
-      <section aria-label={t("title")} className="w-full px-2 lg:max-w-md lg:pr-4 lg:pl-0">
+      <section aria-label={t("title")} className="w-full px-2 md:max-w-md md:px-4">
         <div className="mb-3">
           <Link
             href="/challenges"

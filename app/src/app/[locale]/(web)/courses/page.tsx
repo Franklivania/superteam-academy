@@ -15,7 +15,7 @@ import Image from "next/image";
 type CourseItem = {
   slug: string;
   title: string;
-  description: string | null;
+  shortDescription: string | null;
   image_url: string | null;
   published: boolean;
   modules: Array<{ slug: string; title: string; order: number; lessons: unknown[] }>;
@@ -72,7 +72,7 @@ export default function CoursesPage() {
       list = list.filter(
         (c) =>
           c.title.toLowerCase().includes(q) ||
-          (c.description ?? "").toLowerCase().includes(q),
+          (c.shortDescription ?? "").toLowerCase().includes(q),
       );
     }
     if (difficulty_filter !== "all") {
@@ -178,9 +178,9 @@ export default function CoursesPage() {
                     )}
                     <CardContent className="flex flex-col flex-1 space-y-4 p-6 pt-5">
                       <h2 className="font-semibold text-foreground">{course.title}</h2>
-                      {course.description && (
+                      {course.shortDescription && (
                         <p className="line-clamp-2 text-sm text-muted-foreground">
-                          {course.description}
+                          {course.shortDescription}
                         </p>
                       )}
                       <div className="flex flex-wrap gap-2">

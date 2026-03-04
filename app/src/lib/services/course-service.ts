@@ -10,9 +10,21 @@ export { is_sanity_configured } from "@/lib/sanity/client";
 export type Course = {
   slug: string;
   title: string;
-  description: string | null;
+  shortDescription: string | null;
+  description: any | null;
   image_url: string | null;
   published: boolean;
+  difficulty: string | null;
+  durationHours: number | null;
+  tags: string[] | null;
+  track: { title: string } | null;
+  instructor: {
+    name: string;
+    avatar_url: string | null;
+    bio: any | null;
+    role: string | null;
+    social: { twitter?: string; github?: string; website?: string } | null;
+  } | null;
   modules: Module[];
 };
 
@@ -77,10 +89,22 @@ type Sanity_module = {
 type Sanity_course = {
   slug?: { current?: string } | null;
   title?: string | null;
-  description?: string | null;
+  shortDescription?: string | null;
+  description?: any | null;
   image?: { asset?: { url?: string | null } | null } | null;
   image_url?: string | null;
   published?: boolean | null;
+  difficulty?: string | null;
+  durationHours?: number | null;
+  tags?: string[] | null;
+  track?: { title?: string | null } | null;
+  instructor?: {
+    name?: string | null;
+    avatar_url?: string | null;
+    bio?: any | null;
+    role?: string | null;
+    social?: { twitter?: string; github?: string; website?: string } | null;
+  } | null;
   modules?: Sanity_module[] | null;
 };
 
@@ -140,9 +164,23 @@ function map_sanity_course(doc: Sanity_course): Course {
   return {
     slug,
     title: doc.title ?? slug,
+    shortDescription: doc.shortDescription ?? null,
     description: doc.description ?? null,
     image_url,
     published: doc.published ?? false,
+    difficulty: doc.difficulty ?? null,
+    durationHours: doc.durationHours ?? null,
+    tags: doc.tags ?? null,
+    track: doc.track?.title ? { title: doc.track.title } : null,
+    instructor: doc.instructor?.name
+      ? {
+        name: doc.instructor.name,
+        avatar_url: doc.instructor.avatar_url ?? null,
+        bio: doc.instructor.bio ?? null,
+        role: doc.instructor.role ?? null,
+        social: doc.instructor.social ?? null,
+      }
+      : null,
     modules: modules_sorted,
   };
 }
@@ -156,9 +194,21 @@ function build_course_query(draft: boolean): string {
       slug,
       "slug": coalesce(slug.current, slug),
       title,
-      "description": coalesce(shortDescription, pt::text(description)),
+      shortDescription,
+      description,
       "image_url": coalesce(image.asset->url, null),
       published,
+      difficulty,
+      durationHours,
+      tags,
+      track->{title},
+      instructor->{
+        name,
+        "avatar_url": coalesce(avatar.asset->url, null),
+        bio,
+        role,
+        social
+      },
       modules[]{
         slug,
         "slug": coalesce(slug.current, slug),

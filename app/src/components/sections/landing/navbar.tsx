@@ -116,7 +116,7 @@ export function Navbar({ content }: NavbarProps) {
             "size-10 rounded-none border-2 border-border bg-card",
             "shadow-(--shadow-flat) dark:shadow-(--shadow-flat-yellow)",
             "flex items-center justify-center text-foreground",
-            "hover:opacity-90 transition-[opacity,box-shadow,background-color,border-color] duration-200"
+            "hover:opacity-90 transition-[opacity,box-shadow,background-color,border-color] hover:scale-90 hover:shadow-none duration-200"
           )}
           aria-label={content.toggleTheme}
         >

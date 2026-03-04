@@ -120,13 +120,17 @@ function get_anchor_provider(): anchor.AnchorProvider {
 
 function get_program(): anchor.Program {
   const provider = get_anchor_provider();
-  // anchor.Program constructor types are not available in this environment,
-  // so we cast through a generic constructor to satisfy TypeScript.
+  // The IDL uses Anchor 0.30+ spec where account structs are separate from
+  // the `types` array. BorshAccountsCoder in v0.32.x crashes because it can't
+  // resolve account sizes. We only ever use program.methods, never
+  // program.account, so stripping accounts from the IDL is safe.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const safe_idl = { ...onchain_academy_idl, accounts: [] } as anchor.Idl;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ProgramCtor = anchor.Program as any as {
     new(idl: anchor.Idl, program_id: PublicKey, provider: anchor.AnchorProvider): anchor.Program;
   };
-  return new ProgramCtor(onchain_academy_idl, PROGRAM_ID, provider);
+  return new ProgramCtor(safe_idl, PROGRAM_ID, provider);
 }
 
 function derive_config_pda(): PublicKey {
