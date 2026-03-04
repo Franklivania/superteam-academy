@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useAPIQuery } from "@/lib/api/useAPI";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useDebounce } from "@/lib/hooks/use-debounce";
 
 type CourseItem = {

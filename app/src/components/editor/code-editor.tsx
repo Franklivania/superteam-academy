@@ -19,17 +19,19 @@ type CodeEditorProps = {
 };
 
 export function CodeEditor({ storageKey, language, initialCode = "", onChange }: CodeEditorProps) {
-  const [code, setCode] = useState<string>("");
+  const [code, setCode] = useState<string>(() => initialCode);
   const [output, setOutput] = useState<string>("");
 
   useEffect(() => {
-    const stored = typeof window !== "undefined" ? window.localStorage.getItem(storageKey) : null;
+    if (typeof window === "undefined") return;
+    const stored = window.localStorage.getItem(storageKey);
     if (stored !== null) {
-      setCode(stored);
-    } else {
-      setCode(initialCode);
+      const id = window.setTimeout(() => {
+        setCode(stored);
+      }, 0);
+      return () => window.clearTimeout(id);
     }
-  }, [storageKey, initialCode]);
+  }, [storageKey]);
 
   const handleChange = (value: string | undefined) => {
     const next = value ?? "";
@@ -49,14 +51,14 @@ export function CodeEditor({ storageKey, language, initialCode = "", onChange }:
     try {
       const logs: string[] = [];
       const originalLog = console.log;
-      // eslint-disable-next-line no-console
+       
       console.log = (...args: unknown[]) => {
         logs.push(args.map(String).join(" "));
       };
-      // eslint-disable-next-line no-new-func
+       
       const fn = new Function(code);
       fn();
-      // eslint-disable-next-line no-console
+       
       console.log = originalLog;
       setOutput(logs.join("\n") || "[no output]");
     } catch (err) {

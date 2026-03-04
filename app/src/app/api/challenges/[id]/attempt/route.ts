@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { require_auth } from "@/lib/api/guard";
 import { json_error, json_ok } from "@/lib/api/response";
 import { attempt_challenge_body_schema } from "@/lib/validators/challenge";

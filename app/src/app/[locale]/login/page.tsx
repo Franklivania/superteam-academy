@@ -22,6 +22,20 @@ const login_schema = z.object({
 });
 
 export default function LoginPage(): React.ReactElement {
+  return (
+    <React.Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center p-4 text-sm text-muted-foreground">
+          Loading…
+        </div>
+      }
+    >
+      <LoginPageInner />
+    </React.Suspense>
+  );
+}
+
+function LoginPageInner(): React.ReactElement {
   const t = useTranslations("auth");
   const t_common = useTranslations("common");
   const locale = useLocale();

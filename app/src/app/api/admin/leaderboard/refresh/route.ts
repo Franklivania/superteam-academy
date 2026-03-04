@@ -1,10 +1,10 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { require_admin_role } from "@/lib/api/guard";
 import { api_error, api_success } from "@/lib/api/response";
 import { refresh_leaderboard_from_chain } from "@/lib/services/leaderboard-service";
 import { check_rate_limit } from "@/lib/security/rate-limit";
 
-export async function POST(request: NextRequest): Promise<Response> {
+export async function POST(_request: NextRequest): Promise<Response> {
   const result = await require_admin_role();
   if (result.response) return result.response;
 

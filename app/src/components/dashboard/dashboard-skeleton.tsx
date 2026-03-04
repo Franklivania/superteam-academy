@@ -1,8 +1,9 @@
 "use client";
 
 import { CardSkeleton } from "@/components/dashboard/card-skeleton";
+import { ReactNode } from "react";
 
-export function DashboardSkeleton(): JSX.Element {
+export function DashboardSkeleton(): ReactNode {
   return (
     <div className="container mx-auto space-y-8 p-4 md:p-6">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

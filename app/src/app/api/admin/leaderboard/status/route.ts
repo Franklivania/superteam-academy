@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { require_admin_role } from "@/lib/api/guard";
 import { json_ok } from "@/lib/api/response";
 import { db } from "@/lib/db";

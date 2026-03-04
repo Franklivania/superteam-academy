@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { useAPIQuery, useAPIMutation } from "@/lib/api/useAPI";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/auth-store";
-import { Link } from "@/i18n/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -61,14 +60,16 @@ export default function ProfilePage() {
     "/api/user/profile",
   );
 
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [name, setName] = useState(() => profile?.name ?? "");
+  const [imageUrl, setImageUrl] = useState(() => profile?.image_url ?? "");
 
   useEffect(() => {
-    if (profile) {
-      setName(profile.name ?? "");
-      setImageUrl(profile.image_url ?? "");
-    }
+    if (!profile) return;
+    const id = window.setTimeout(() => {
+      setName((current) => (current === "" ? profile.name ?? "" : current));
+      setImageUrl((current) => (current === "" ? profile.image_url ?? "" : current));
+    }, 0);
+    return () => window.clearTimeout(id);
   }, [profile]);
 
   const handleSubmit = async (e: React.FormEvent) => {

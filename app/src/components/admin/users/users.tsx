@@ -400,7 +400,7 @@ export function AdminUsersView(): ReactNode {
                           const payload = JSON.stringify(selected_user, null, 2);
                           if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
                             // Fire and forget; we only need best-effort copy.
-                            // eslint-disable-next-line @typescript-eslint/no-floating-promises
+                             
                             navigator.clipboard.writeText(payload);
                           }
                           const target = event.currentTarget;

@@ -29,12 +29,6 @@ type Challenge = {
   language?: string | null;
 };
 
-type ChallengeExample = {
-  input?: string;
-  output?: string;
-  explanation?: string;
-};
-
 const SUPPORTED_LANGUAGES = [
   { value: "javascript", label: "JavaScript" },
   { value: "typescript", label: "TypeScript" },
@@ -69,7 +63,6 @@ export function ChallengeDetailView({ challenge_id }: { challenge_id: string }) 
     const normalized = (challenge.language ?? "javascript").toLowerCase();
     const initial_language: SupportedLanguage =
       normalized === "typescript" ? "typescript" : "javascript";
-    set_language(initial_language);
 
     const starter_from_spec =
       spec?.starter_code && spec.starter_code.length > 0 ? spec.starter_code : null;
@@ -81,7 +74,12 @@ export function ChallengeDetailView({ challenge_id }: { challenge_id: string }) 
 
     const starter = starter_from_spec ?? starter_from_challenge ?? "";
 
-    set_solution(starter);
+    const id = window.setTimeout(() => {
+      set_language((current) => (current === "javascript" ? initial_language : current));
+      set_solution((current) => (current === "" ? starter : current));
+    }, 0);
+
+    return () => window.clearTimeout(id);
   }, [challenge, spec]);
 
   const submit_mutation = useAPIMutation<{ passed: boolean; xp_awarded: number }>(

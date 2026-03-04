@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, type _Translator } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
@@ -16,12 +16,16 @@ import { getData } from "@/lib/api/config";
 import type { AdminLogRow, AdminLogsResponse } from "@/lib/types/admin";
 import { AdminLogsSkeleton } from "./logs-skeleton";
 
-function format_log_message(log: AdminLogRow, translate: (key: string, values?: Record<string, unknown>) => string): string {
+function format_log_message(
+  log: AdminLogRow,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  translate: _Translator<Record<string, any>, "admin.logs">,
+): string {
   const created_date = new Date(log.created_at);
   const created_at_local = created_date.toLocaleString();
   const actor = log.actor_email ?? translate("unknownActor");
 
-  const base_values: Record<string, unknown> = {
+  const base_values: Record<string, string | number | Date> = {
     actor,
     target: log.target_type ?? "",
     targetId: log.target_id ?? "",

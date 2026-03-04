@@ -14,11 +14,12 @@ import { useEffect, useState } from "react";
 
 export function ThemeToggle(): React.ReactElement {
   const t = useTranslations("user.header");
-  const [mounted, set_mounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    set_mounted(true);
+    const id = window.setTimeout(() => setMounted(true), 0);
+    return () => window.clearTimeout(id);
   }, []);
 
   if (!mounted) {

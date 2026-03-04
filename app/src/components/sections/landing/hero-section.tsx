@@ -103,7 +103,12 @@ export function HeroSection({ content }: HeroSectionProps) {
               </div>
               <div className="flex gap-3">
                 <span className="text-muted-foreground min-w-[20px]">7</span>
-                <span>    <span className="text-(--color-code-muted)">// emit verified badge</span></span>
+                <span>
+                  {"    "}
+                  <span className="text-(--color-code-muted)">
+                    {"// emit verified badge"}
+                  </span>
+                </span>
               </div>
               <div className="flex gap-3">
                 <span className="text-muted-foreground min-w-[20px]">8</span>

@@ -11,10 +11,11 @@ export function SectionLabel({ children, className }: SectionLabelProps) {
     <p
       className={cn(
         "font-mono text-xs tracking-widest uppercase text-primary dark:text-accent mb-3",
-        className
+        className,
       )}
     >
-      // {children}
+      {"// "}
+      {children}
     </p>
   );
 }

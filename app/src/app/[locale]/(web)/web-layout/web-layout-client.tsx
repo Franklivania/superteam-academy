@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "next/navigation";
 import { Menu } from "lucide-react";
 import { Navbar } from "@/components/sections/landing/navbar";
@@ -14,7 +14,6 @@ import { FlatButton } from "@/components/ui/flat-button";
 import { Link } from "@/i18n/navigation";
 import type { NavContent } from "@/lib/types/landing";
 import { getWebLayoutContent } from "@/lib/content";
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -26,13 +25,6 @@ type MobileWebNavbarProps = {
 
 function MobileWebNavbar({ content }: MobileWebNavbarProps): ReactNode {
   const [open, set_open] = useState(false);
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  const isDark = mounted && theme === "dark";
-  const logoSrc = isDark ? "/dark-logo.jpg" : "/light-logo.jpg";
-
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-20 flex h-16 items-center justify-between border-b-2 border-border bg-nav-bg px-4 backdrop-blur-sm md:hidden">
@@ -48,7 +40,7 @@ function MobileWebNavbar({ content }: MobileWebNavbarProps): ReactNode {
           )}
         >
           <Image
-            src={logoSrc}
+            src="/light-logo.jpg"
             alt="Superteam Academy"
             fill
             className="object-cover"

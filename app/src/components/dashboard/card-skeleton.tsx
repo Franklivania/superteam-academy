@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { ReactNode } from "react";
 
 type CardSkeletonProps = {
   className?: string;
@@ -10,7 +11,7 @@ type CardSkeletonProps = {
 export function CardSkeleton({
   className,
   lines = 2,
-}: CardSkeletonProps): JSX.Element {
+}: CardSkeletonProps): ReactNode {
   return (
     <div
       className={cn(

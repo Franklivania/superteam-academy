@@ -13,7 +13,10 @@ interface FooterProps {
 export function Footer({ content }: FooterProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    const id = window.setTimeout(() => setMounted(true), 0);
+    return () => window.clearTimeout(id);
+  }, []);
   const isDark = mounted && theme === "dark";
   const logoSrc = isDark ? "/dark-logo.jpg" : "/light-logo.jpg";
   const currentYear = new Date().getFullYear();

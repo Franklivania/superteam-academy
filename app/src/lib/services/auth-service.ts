@@ -26,7 +26,7 @@ async function hash_token(token: string): Promise<string> {
   const crypto_obj =
     typeof globalThis.crypto !== "undefined"
       ? globalThis.crypto
-      : // eslint-disable-next-line @typescript-eslint/no-var-requires
+      :  
         (await import("crypto")).webcrypto;
   const digest = await crypto_obj.subtle.digest("SHA-256", data.buffer as ArrayBuffer);
   const bytes = new Uint8Array(digest);

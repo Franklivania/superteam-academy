@@ -31,7 +31,7 @@ export async function run_challenge_tests(
     const tc = test_cases[i]!;
     try {
       // Expect user solution to define a function named `solve`
-      // eslint-disable-next-line no-new-func
+       
       const fnFactory = new Function(`${solution_code}; return typeof solve === "function" ? solve : null;`);
       const solve = fnFactory();
       if (!solve) {
@@ -47,7 +47,7 @@ export async function run_challenge_tests(
 
       const input = tc.input ? JSON.parse(tc.input) : undefined;
       const expected = tc.expected ? JSON.parse(tc.expected) : undefined;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+       
       const actualValue = solve(input);
       const actual = JSON.stringify(actualValue);
 

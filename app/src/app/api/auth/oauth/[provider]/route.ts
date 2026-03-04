@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 const PROVIDERS = ["google", "github"] as const;
@@ -8,7 +8,7 @@ function is_provider(s: string): s is Provider {
   return PROVIDERS.includes(s as Provider);
 }
 
-function get_redirect_uri(request: NextRequest): string {
+function get_redirect_uri(_request: NextRequest): string {
   const base = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
   return `${base}/api/auth/oauth/callback`;
 }

@@ -50,7 +50,8 @@ export function AdvantagesSection({ content }: AdvantagesSectionProps) {
           </ul>
           <div className="bg-(--color-surface-dark-card) border-2 border-border rounded-xl p-8 flex flex-col gap-4">
             <p className="font-mono text-[0.65rem] text-(--color-yellow) tracking-widest mb-1">
-              // {content.leaderboardLabel}
+              {"// "}
+              {content.leaderboardLabel}
             </p>
             {content.leaderboardRows.map((row, i) => (
               <div
