@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 declare global {
@@ -49,7 +49,15 @@ export function GA4Provider({ children }: { children: ReactNode }): ReactNode {
   return <>{children}</>;
 }
 
-export function GA4PageView(): null {
+export function GA4PageView(): ReactNode {
+  return (
+    <Suspense fallback={null}>
+      <GA4PageViewInner />
+    </Suspense>
+  );
+}
+
+function GA4PageViewInner(): null {
   const pathname = usePathname();
   const search_params = useSearchParams();
 
