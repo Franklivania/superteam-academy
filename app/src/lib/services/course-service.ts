@@ -105,7 +105,7 @@ type Sanity_challenge_detail = Sanity_challenge_meta & {
 };
 
 function map_sanity_lesson(doc: Sanity_lesson): Lesson {
-  const slug = doc.slug?.current ?? "";
+  const slug = typeof doc.slug === "string" ? doc.slug : (doc.slug?.current ?? "");
   return {
     slug,
     title: doc.title ?? slug,
@@ -116,7 +116,7 @@ function map_sanity_lesson(doc: Sanity_lesson): Lesson {
 }
 
 function map_sanity_module(doc: Sanity_module): Module {
-  const slug = doc.slug?.current ?? "";
+  const slug = typeof doc.slug === "string" ? doc.slug : (doc.slug?.current ?? "");
   const lessons_source = doc.lessons ?? [];
   const lessons_mapped = lessons_source.map((lesson_doc) => map_sanity_lesson(lesson_doc));
   const lessons_sorted = [...lessons_mapped].sort((lesson_a, lesson_b) => lesson_a.order - lesson_b.order);
@@ -130,7 +130,7 @@ function map_sanity_module(doc: Sanity_module): Module {
 }
 
 function map_sanity_course(doc: Sanity_course): Course {
-  const slug = doc.slug?.current ?? "";
+  const slug = typeof doc.slug === "string" ? doc.slug : (doc.slug?.current ?? "");
   const modules_source = doc.modules ?? [];
   const modules_mapped = modules_source.map((module_doc) => map_sanity_module(module_doc));
   const modules_sorted = [...modules_mapped].sort((module_a, module_b) => module_a.order - module_b.order);
@@ -201,7 +201,7 @@ export async function get_lessons(course_slug: string, draft = false): Promise<L
 export async function get_challenges(draft = false): Promise<ChallengeMeta[]> {
   if (!is_sanity_configured()) return [];
 
-  const visibility_filter = draft ? "" : ' && !(_id in path("drafts.**")) && defined(published) && published == true';
+  const visibility_filter = draft ? "" : ' && !(_id in path("drafts.**")) && coalesce(published, true) == true';
   const query =
     '*[_type == "challenge"' +
     visibility_filter +
@@ -247,7 +247,7 @@ export async function get_challenges(draft = false): Promise<ChallengeMeta[]> {
 export async function get_challenge_by_id(id: string, draft = false): Promise<ChallengeDetail | null> {
   if (!is_sanity_configured()) return null;
 
-  const visibility_filter = draft ? "" : ' && !(_id in path("drafts.**")) && defined(published) && published == true';
+  const visibility_filter = draft ? "" : ' && !(_id in path("drafts.**")) && coalesce(published, true) == true';
   const query =
     `*[_type == "challenge" && _id == $id` +
     visibility_filter +

@@ -70,3 +70,31 @@ export async function record_streak_event(
   });
 }
 
+export type User_streak = {
+  current_streak_days: number;
+  longest_streak_days: number;
+  last_activity_at: Date | null;
+};
+
+export async function get_user_streak(user_id: string): Promise<User_streak> {
+  const [row] = await db
+    .select()
+    .from(user_streaks)
+    .where(eq(user_streaks.user_id, user_id))
+    .limit(1);
+
+  if (!row) {
+    return {
+      current_streak_days: 0,
+      longest_streak_days: 0,
+      last_activity_at: null,
+    };
+  }
+
+  return {
+    current_streak_days: row.current_streak_days,
+    longest_streak_days: row.longest_streak_days,
+    last_activity_at: row.last_activity_at,
+  };
+}
+

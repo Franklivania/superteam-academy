@@ -5,6 +5,7 @@ import { api_error, api_success } from "@/lib/api/response";
 import { enrollment_sync_body_schema } from "@/lib/validators/enrollment";
 import { db } from "@/lib/db";
 import { course_enrollments, wallets } from "@/lib/db/schema";
+import { academy_build_enroll_tx } from "@/lib/services/academy-client";
 
 export async function POST(request: NextRequest): Promise<Response> {
   const result = await require_auth();
@@ -49,13 +50,22 @@ export async function POST(request: NextRequest): Promise<Response> {
     );
   }
 
-  const message = `Enroll in course:${course_slug} as user:${session.sub}`;
+  try {
+    const serialized_tx = await academy_build_enroll_tx({
+      learner_public_key: wallet.public_key,
+      course_id: course_slug,
+    });
 
-  return api_success(
-    {
-      message,
-    },
-    "Sign this message with your wallet to enroll. Submit signature to /api/enrollment/sync/confirm.",
-    200,
-  );
+    return api_success(
+      {
+        transaction: serialized_tx,
+        course_slug,
+      },
+      "Sign and send this transaction with your wallet. Submit the signature to /api/enrollment/sync/confirm.",
+      200,
+    );
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Failed to build enrollment transaction";
+    return api_error(msg, 500);
+  }
 }

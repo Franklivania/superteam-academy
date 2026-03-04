@@ -67,7 +67,10 @@
     "enrollmentError": "Falha na inscrição. Conecte sua carteira primeiro.",
     "noCourses": "Nenhum curso encontrado",
     "lessons": "Aulas",
-    "modules": "Módulos"
+    "modules": "Módulos",
+    "difficulty_beginner": "Iniciante",
+    "difficulty_intermediate": "Intermediário",
+    "difficulty_advanced": "Avançado"
   },
   "challenges": {
     "title": "Desafios",
@@ -157,7 +160,9 @@
     "challengeCompletion": "Desafio concluído",
     "achievementAward": "Conquista obtida",
     "walletStatus": "Status da carteira",
-    "achievements": "Conquistas"
+    "achievements": "Conquistas",
+    "recommendedCourses": "Cursos Recomendados",
+    "recommendedDescription": "Explore mais cursos para continuar sua jornada de aprendizado."
   },
   "leaderboard": {
     "title": "Ranking",
@@ -177,7 +182,11 @@
     "complete": "Marcar como concluída",
     "completed": "Concluída",
     "runCode": "Executar código",
-    "moduleComplete": "Módulo concluído!"
+    "moduleComplete": "Módulo concluído!",
+    "previous": "Anterior",
+    "next": "Próxima",
+    "moduleOverview": "Visão geral do módulo",
+    "toggleEditor": "Alternar editor"
   },
   "admin": {
     "label": "Admin",
@@ -338,10 +347,20 @@
     "xp": "XP",
     "level": "Nível",
     "streak": "Sequência",
+    "longest": "Mais longa",
+    "rank": "Posição",
     "achievements": "Conquistas",
     "noAchievements": "Nenhuma conquista ainda",
     "connected": "Conectado",
-    "notConnected": "Não conectado"
+    "notConnected": "Não conectado",
+    "name": "Nome",
+    "cancel": "Cancelar",
+    "credentials": "NFTs de Credencial",
+    "noCredentials": "Nenhuma credencial ainda. Conclua um curso para ganhar sua primeira credencial.",
+    "startLearning": "Começar a aprender",
+    "viewOnExplorer": "Ver no Solana Explorer",
+    "showAll": "Mostrar tudo",
+    "showLess": "Mostrar menos"
   },
   "settings": {
     "title": "Configurações",
@@ -356,10 +375,19 @@
   "certificates": {
     "title": "Certificados",
     "description": "Suas credenciais de conclusão de curso aparecerão aqui.",
+    "empty": "Nenhum certificado ainda. Conclua um curso para ganhar sua primeira credencial on-chain.",
     "emptyTitle": "Ainda não há certificados",
     "emptyDescription": "Conclua um curso para ganhar seu primeiro certificado on-chain.",
+    "browseCourses": "Ver cursos",
     "goToCourses": "Ver cursos",
     "viewDetails": "Ver detalhes",
-    "mintedOn": "Emitido em"
+    "viewOnExplorer": "Ver no Solana Explorer",
+    "mintedOn": "Emitido em",
+    "mintAddress": "Endereço do mint",
+    "notFound": "Certificado não encontrado",
+    "certificateOf": "Certificado de Conclusão",
+    "awardedTo": "Concedido a",
+    "share": "Compartilhar",
+    "download": "Baixar PDF"
   }
 }

@@ -67,7 +67,10 @@
     "enrollmentError": "Error al inscribirse. Conecta tu wallet primero.",
     "noCourses": "No se encontraron cursos",
     "lessons": "Lecciones",
-    "modules": "Módulos"
+    "modules": "Módulos",
+    "difficulty_beginner": "Principiante",
+    "difficulty_intermediate": "Intermedio",
+    "difficulty_advanced": "Avanzado"
   },
   "challenges": {
     "title": "Desafíos",
@@ -157,7 +160,9 @@
     "challengeCompletion": "Desafío completado",
     "achievementAward": "Logro obtenido",
     "walletStatus": "Estado de wallet",
-    "achievements": "Logros"
+    "achievements": "Logros",
+    "recommendedCourses": "Cursos Recomendados",
+    "recommendedDescription": "Explora más cursos para continuar tu camino de aprendizaje."
   },
   "leaderboard": {
     "title": "Ranking",
@@ -177,7 +182,11 @@
     "complete": "Marcar como completada",
     "completed": "Completada",
     "runCode": "Ejecutar código",
-    "moduleComplete": "¡Módulo completado!"
+    "moduleComplete": "¡Módulo completado!",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "moduleOverview": "Resumen del módulo",
+    "toggleEditor": "Alternar editor"
   },
   "admin": {
     "label": "Admin",
@@ -338,10 +347,20 @@
     "xp": "XP",
     "level": "Nivel",
     "streak": "Racha",
+    "longest": "Más larga",
+    "rank": "Posición",
     "achievements": "Logros",
     "noAchievements": "Todavía no hay logros",
     "connected": "Conectado",
-    "notConnected": "No conectado"
+    "notConnected": "No conectado",
+    "name": "Nombre",
+    "cancel": "Cancelar",
+    "credentials": "NFTs de Credencial",
+    "noCredentials": "Aún no tienes credenciales. Completa un curso para ganar tu primera credencial.",
+    "startLearning": "Empezar a aprender",
+    "viewOnExplorer": "Ver en Solana Explorer",
+    "showAll": "Mostrar todo",
+    "showLess": "Mostrar menos"
   },
   "settings": {
     "title": "Ajustes",
@@ -356,10 +375,19 @@
   "certificates": {
     "title": "Certificados",
     "description": "Aquí aparecerán tus credenciales de finalización de cursos.",
+    "empty": "Aún no tienes certificados. Completa un curso para ganar tu primera credencial on-chain.",
     "emptyTitle": "Aún no tienes certificados",
     "emptyDescription": "Completa un curso para ganar tu primer certificado on-chain.",
+    "browseCourses": "Ver cursos",
     "goToCourses": "Ver cursos",
     "viewDetails": "Ver detalles",
-    "mintedOn": "Emitido el"
+    "viewOnExplorer": "Ver en Solana Explorer",
+    "mintedOn": "Emitido el",
+    "mintAddress": "Dirección de mint",
+    "notFound": "Certificado no encontrado",
+    "certificateOf": "Certificado de Finalización",
+    "awardedTo": "Otorgado a",
+    "share": "Compartir",
+    "download": "Descargar PDF"
   }
 }

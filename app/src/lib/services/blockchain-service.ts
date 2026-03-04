@@ -7,6 +7,7 @@
  */
 import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 import { getAssociatedTokenAddress, TOKEN_2022_PROGRAM_ID } from "@solana/spl-token";
+import { academy_reward_xp } from "@/lib/services/academy-client";
 
 const PROGRAM_ID = process.env.NEXT_PUBLIC_PROGRAM_ID;
 export const XP_MINT = process.env.NEXT_PUBLIC_XP_MINT;
@@ -86,6 +87,11 @@ export async function fetch_credential_nfts(wallet_public_key: string): Promise<
     return [];
   }
 
+  type Das_attribute = {
+    trait_type?: string;
+    value?: string | number | null;
+  };
+
   type Das_asset = {
     id: string;
     grouping?: Array<{ group_key: string; group_value: string }>;
@@ -93,6 +99,7 @@ export async function fetch_credential_nfts(wallet_public_key: string): Promise<
       metadata?: {
         name?: string;
         symbol?: string;
+        attributes?: Das_attribute[];
       };
     };
     mint?: string;
@@ -140,16 +147,47 @@ export async function fetch_credential_nfts(wallet_public_key: string): Promise<
       const track_group = asset.grouping?.find((group_item) => group_item.group_key === "collection");
       const track = track_group?.group_value ?? null;
 
+      const attributes = asset.content?.metadata?.attributes ?? [];
+
+      const level_attr = attributes.find((attribute) => attribute.trait_type === "level");
+      const courses_completed_attr = attributes.find(
+        (attribute) => attribute.trait_type === "courses_completed",
+      );
+      const total_xp_attr = attributes.find((attribute) => attribute.trait_type === "total_xp");
+      const track_attr = attributes.find((attribute) => attribute.trait_type === "track");
+
+      const parsed_level =
+        typeof level_attr?.value === "number"
+          ? level_attr.value
+          : level_attr?.value
+            ? Number(level_attr.value)
+            : null;
+      const parsed_courses_completed =
+        typeof courses_completed_attr?.value === "number"
+          ? courses_completed_attr.value
+          : courses_completed_attr?.value
+            ? Number(courses_completed_attr.value)
+            : null;
+      const parsed_total_xp =
+        typeof total_xp_attr?.value === "number"
+          ? total_xp_attr.value
+          : total_xp_attr?.value
+            ? Number(total_xp_attr.value)
+            : null;
+
+      const track_value =
+        track_attr?.value && typeof track_attr.value === "string" ? track_attr.value : track;
+
       const explorer_base = "https://explorer.solana.com/address/";
       const explorer_url = `${explorer_base}${mint}?cluster=devnet`;
 
       return {
         mint_address: mint,
         name,
-        track,
-        level: null as number | null,
-        courses_completed: null as number | null,
-        xp: null as number | null,
+        track: track_value,
+        level: parsed_level,
+        courses_completed: parsed_courses_completed,
+        xp: parsed_total_xp,
         explorer_url,
       };
     });
@@ -176,13 +214,13 @@ export async function reward_xp_onchain(args: {
     throw new Error("Program or XP mint not configured");
   }
 
-  // TODO: implement Anchor client call to onchain-academy::reward_xp
-  // - Validate enrollment / eligibility on-chain
-  // - Prevent duplicate mint for the same (user, reason, challenge_id)
-  // - Confirm transaction at 'confirmed' commitment
-  // - Retry once on blockhash expiry
+  const tx_signature = await academy_reward_xp({
+    recipient_public_key: args.wallet_public_key,
+    amount: args.amount,
+    reason: args.reason,
+  });
 
-  return "TODO_TX_SIGNATURE";
+  return tx_signature;
 }
 
 export function get_backend_signer_keypair(): Uint8Array | null {

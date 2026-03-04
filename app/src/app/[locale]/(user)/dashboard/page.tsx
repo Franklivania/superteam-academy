@@ -79,8 +79,50 @@ function formatDate(s: string | null): string {
   }
 }
 
+/** 7-day streak calendar grid */
+function StreakCalendar({ streakDays }: { streakDays: number }) {
+  const days = Array.from({ length: 7 }, (_, i) => i < streakDays);
+  const labels = ["M", "T", "W", "T", "F", "S", "S"];
+  return (
+    <div className="flex gap-1">
+      {days.map((active, idx) => (
+        <div key={idx} className="flex flex-col items-center gap-0.5">
+          <span className="text-[10px] text-muted-foreground">{labels[idx]}</span>
+          <div
+            className={`size-6 rounded-none border-2 ${active
+                ? "border-primary bg-primary/20"
+                : "border-border bg-muted/40"
+              }`}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** Milestone markers */
+function MilestoneMarkers({ current }: { current: number }) {
+  const milestones = [7, 30, 100];
+  return (
+    <div className="flex gap-3 mt-2">
+      {milestones.map((m) => (
+        <span
+          key={m}
+          className={`text-xs font-semibold px-2 py-0.5 rounded-none border ${current >= m
+              ? "border-primary bg-primary/10 text-primary"
+              : "border-border bg-muted text-muted-foreground"
+            }`}
+        >
+          {m}d {current >= m ? "✓" : ""}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export default function DashboardPage() {
   const t = useTranslations("dashboard");
+  const t_courses = useTranslations("courses");
   const session = useAuthStore((s) => s.session);
   const isLoaded = useAuthStore((s) => s.is_loaded);
 
@@ -127,10 +169,10 @@ export default function DashboardPage() {
   const achievements = achievementsData?.achievements ?? [];
   const lastEarned = achievements.length > 0
     ? achievements.sort(
-        (a, b) =>
-          new Date(b.awarded_at ?? 0).getTime() -
-          new Date(a.awarded_at ?? 0).getTime(),
-      )[0]
+      (a, b) =>
+        new Date(b.awarded_at ?? 0).getTime() -
+        new Date(a.awarded_at ?? 0).getTime(),
+    )[0]
     : null;
   const recentActivity = achievements
     .sort(
@@ -178,17 +220,19 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
-            {/* B. Streak */}
+            {/* B. Streak with Calendar */}
             <Card className={cardClass}>
               <CardHeader className="p-0">
                 <CardTitle className="text-sm font-semibold text-muted-foreground">
                   {t("streak")}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="mt-3 space-y-1 p-0">
+              <CardContent className="mt-3 space-y-2 p-0">
                 <p className="text-2xl font-bold text-foreground">
                   {t("streakDays", { count: streak.current_streak_days })}
                 </p>
+                <StreakCalendar streakDays={Math.min(streak.current_streak_days, 7)} />
+                <MilestoneMarkers current={streak.current_streak_days} />
                 <p className="text-sm font-medium text-muted-foreground">
                   {t("longestStreak")}: {streak.longest_streak_days}
                 </p>
@@ -198,7 +242,7 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
-            {/* Leaderboard rank + Wallet or third metric */}
+            {/* C. Leaderboard rank */}
             <Card className={cardClass}>
               <CardHeader className="p-0">
                 <CardTitle className="text-sm font-semibold text-muted-foreground">
@@ -219,7 +263,7 @@ export default function DashboardPage() {
             </Card>
           </section>
 
-          {/* C. Leaderboard snapshot */}
+          {/* D. Leaderboard snapshot */}
           <section aria-labelledby="leaderboard-snapshot">
             <h2 id="leaderboard-snapshot" className="mb-4 text-lg font-bold text-foreground">
               {t("leaderboardRank")}
@@ -254,7 +298,7 @@ export default function DashboardPage() {
             </Card>
           </section>
 
-          {/* D. Enrolled courses */}
+          {/* E. Enrolled courses */}
           <section aria-labelledby="enrolled-courses">
             <h2 id="enrolled-courses" className="mb-4 text-lg font-bold text-foreground">
               {t("enrolledCourses")}
@@ -296,12 +340,7 @@ export default function DashboardPage() {
                             </span>
                           </div>
                           <Progress value={percent} className="h-2" />
-                          <Link
-                            href={continueHref}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block"
-                          >
+                          <Link href={continueHref} className="inline-block">
                             <Button
                               variant="default"
                               size="sm"
@@ -319,13 +358,32 @@ export default function DashboardPage() {
             )}
           </section>
 
-          {/* E. Achievements summary */}
+          {/* F. Recommended Courses */}
+          <section aria-labelledby="recommended-courses">
+            <h2 id="recommended-courses" className="mb-4 text-lg font-bold text-foreground">
+              {t("recommendedCourses")}
+            </h2>
+            <Card className={cardClass}>
+              <CardContent className="flex flex-col gap-2 p-0">
+                <p className="text-sm text-muted-foreground">
+                  {t("recommendedDescription")}
+                </p>
+                <Link href="/courses" className="inline-block">
+                  <Button variant="outline" size="sm" className="rounded-none border-2">
+                    {t_courses("title")}
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* G. Achievement Gallery */}
           <section aria-labelledby="achievements-summary">
             <h2 id="achievements-summary" className="mb-4 text-lg font-bold text-foreground">
               {t("achievementsSummary")}
             </h2>
             <Card className={cardClass}>
-              <CardContent className="flex flex-col gap-2 p-0">
+              <CardContent className="flex flex-col gap-3 p-0">
                 <p className="text-2xl font-bold text-foreground">
                   {t("totalAchievements")}: {achievementCount}
                 </p>
@@ -334,6 +392,34 @@ export default function DashboardPage() {
                     {t("lastEarned")}: {lastEarned.name ?? "—"}
                   </p>
                 )}
+                {achievements.length > 0 && (
+                  <div className="overflow-x-auto pb-2">
+                    <div className="flex gap-3" style={{ minWidth: "max-content" }}>
+                      {achievements.map((item) => (
+                        <div
+                          key={item.achievement_id}
+                          className="flex shrink-0 items-center gap-2 rounded-none border-2 border-border bg-muted/40 p-2"
+                        >
+                          <img
+                            src={item.image_url ?? AWARD_IMAGE_FALLBACK}
+                            alt=""
+                            className="size-10 shrink-0 rounded-none border-2 border-border object-cover"
+                          />
+                          <div className="min-w-0">
+                            <p className="truncate text-xs font-semibold text-foreground">
+                              {item.name ?? item.achievement_id}
+                            </p>
+                            {typeof item.xp_reward === "number" && item.xp_reward > 0 && (
+                              <p className="text-[11px] text-muted-foreground">
+                                {item.xp_reward} XP
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <Link href="/profile" className="text-sm font-semibold text-primary underline-offset-2 hover:underline">
                   {t("viewProfile")}
                 </Link>
@@ -341,7 +427,7 @@ export default function DashboardPage() {
             </Card>
           </section>
 
-          {/* F. Recent activity */}
+          {/* H. Recent activity */}
           <section aria-labelledby="recent-activity">
             <h2 id="recent-activity" className="mb-4 text-lg font-bold text-foreground">
               {t("recentActivity")}

@@ -180,6 +180,25 @@ async function get_user_criteria_stats(user_id: string): Promise<{
   return { total_xp, lessons_completed, challenges_completed, streak_days, has_wallet, oauth_providers };
 }
 
+/** Fetch all achievements awarded to a user. */
+export async function get_user_achievements(user_id: string) {
+  const rows = await db
+    .select({
+      achievement_id: achievements.achievement_id,
+      name: achievements.name,
+      image_url: achievements.image_url,
+      xp_reward: achievements.xp_reward,
+      metadata_uri: achievements.metadata_uri,
+      tx_signature: achievement_awards.tx_signature,
+      awarded_at: achievement_awards.awarded_at,
+    })
+    .from(achievement_awards)
+    .innerJoin(achievements, eq(achievement_awards.achievement_id, achievements.id))
+    .where(eq(achievement_awards.user_id, user_id));
+
+  return rows;
+}
+
 /**
  * Evaluate criteria-based achievements for a user and award any newly met.
  * Call after lesson complete, challenge submit, or streak update.

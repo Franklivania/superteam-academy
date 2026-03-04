@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { and, eq, isNull } from "drizzle-orm";
+import { Connection, clusterApiUrl } from "@solana/web3.js";
 import { require_auth } from "@/lib/api/guard";
 import { api_error, api_success } from "@/lib/api/response";
 import { db } from "@/lib/db";
@@ -7,23 +8,10 @@ import { course_enrollments, wallets } from "@/lib/db/schema";
 
 type Confirm_body = {
   course_slug: string;
-  message: string;
-  signature: string;
+  tx_signature: string;
 };
 
-function base64_to_uint8array(value: string): Uint8Array | null {
-  try {
-    const binary = atob(value);
-    const length = binary.length;
-    const bytes = new Uint8Array(length);
-    for (let index = 0; index < length; index += 1) {
-      bytes[index] = binary.charCodeAt(index);
-    }
-    return bytes;
-  } catch {
-    return null;
-  }
-}
+const RPC_URL = process.env.NEXT_PUBLIC_SOLANA_RPC ?? clusterApiUrl("devnet");
 
 export async function POST(request: NextRequest): Promise<Response> {
   const result = await require_auth();
@@ -34,8 +22,11 @@ export async function POST(request: NextRequest): Promise<Response> {
   if (!body || typeof body.course_slug !== "string" || body.course_slug.length === 0) {
     return api_error("Invalid body", 400);
   }
+  if (!body.tx_signature || typeof body.tx_signature !== "string") {
+    return api_error("Missing tx_signature", 400);
+  }
 
-  const { course_slug, message, signature } = body;
+  const { course_slug, tx_signature } = body;
 
   const [wallet] = await db
     .select()
@@ -47,19 +38,26 @@ export async function POST(request: NextRequest): Promise<Response> {
     return api_error("Wallet not linked", 400);
   }
 
-  const message_template = `Enroll in course:${course_slug} as user:${session.sub}`;
-  if (message !== message_template) {
-    return api_error("Mismatched enrollment message", 400);
+  // Verify the transaction exists on-chain
+  try {
+    const connection = new Connection(RPC_URL, { commitment: "confirmed" });
+    const tx_info = await connection.getTransaction(tx_signature, {
+      commitment: "confirmed",
+      maxSupportedTransactionVersion: 0,
+    });
+
+    if (!tx_info) {
+      return api_error("Transaction not found on-chain. Please wait and retry.", 404);
+    }
+
+    if (tx_info.meta?.err) {
+      return api_error("Transaction failed on-chain", 400);
+    }
+  } catch {
+    return api_error("Failed to verify transaction on-chain", 500);
   }
 
-  const signature_bytes = base64_to_uint8array(signature);
-  if (!signature_bytes || signature_bytes.length < 32) {
-    return api_error("Missing or invalid wallet signature", 400);
-  }
-
-  // NOTE: This confirms that a signature was produced for the correct message payload.
-  // A full ed25519 verification against wallet.public_key can be added here using a crypto helper.
-
+  // Check for existing enrollment
   const [existing] = await db
     .select()
     .from(course_enrollments)
@@ -88,7 +86,7 @@ export async function POST(request: NextRequest): Promise<Response> {
     user_id: session.sub,
     wallet_public_key: wallet.public_key,
     course_slug,
-    course_id_on_chain: null,
+    course_id_on_chain: tx_signature,
     enrolled_at: now,
     created_at: now,
     updated_at: now,
@@ -97,9 +95,9 @@ export async function POST(request: NextRequest): Promise<Response> {
   return api_success(
     {
       enrolled: true,
+      tx_signature,
     },
-    "Enrollment mirrored for user",
+    "Enrollment confirmed and mirrored",
     200,
   );
 }
-

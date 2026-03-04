@@ -32,7 +32,11 @@ export async function POST(request: NextRequest): Promise<Response> {
   try {
     await link_wallet(session.sub, public_key);
     return json_ok({ ok: true });
-  } catch {
+  } catch (error: any) {
+    console.error("Wallet link error:", error);
+    if (error instanceof Error && error.message === "Wallet is already linked to another account") {
+      return json_error(error.message, 400);
+    }
     return json_error("Failed to link wallet", 500);
   }
 }

@@ -67,7 +67,10 @@
     "enrollmentError": "नामांकन विफल। पहले अपना वॉलेट कनेक्ट करें।",
     "noCourses": "कोई कोर्स नहीं मिला",
     "lessons": "पाठ",
-    "modules": "मॉड्यूल"
+    "modules": "मॉड्यूल",
+    "difficulty_beginner": "शुरुआती",
+    "difficulty_intermediate": "मध्यम",
+    "difficulty_advanced": "उन्नत"
   },
   "challenges": {
     "title": "चुनौतियाँ",
@@ -157,7 +160,9 @@
     "challengeCompletion": "चुनौती पूर्ण",
     "achievementAward": "उपलब्धि अर्जित",
     "walletStatus": "वॉलेट स्थिति",
-    "achievements": "उपलब्धियां"
+    "achievements": "उपलब्धियां",
+    "recommendedCourses": "अनुशंसित कोर्स",
+    "recommendedDescription": "अपनी सीखने की यात्रा जारी रखने के लिए और कोर्स खोजें।"
   },
   "leaderboard": {
     "title": "लीडरबोर्ड",
@@ -177,7 +182,11 @@
     "complete": "पूर्ण के रूप में चिह्नित करें",
     "completed": "पूर्ण",
     "runCode": "कोड चलाएं",
-    "moduleComplete": "मॉड्यूल पूर्ण!"
+    "moduleComplete": "मॉड्यूल पूर्ण!",
+    "previous": "पिछला",
+    "next": "अगला",
+    "moduleOverview": "मॉड्यूल अवलोकन",
+    "toggleEditor": "एडिटर टॉगल करें"
   },
   "admin": {
     "label": "एडमिन",
@@ -338,10 +347,20 @@
     "xp": "XP",
     "level": "स्तर",
     "streak": "सीरीज़",
+    "longest": "सबसे लंबी",
+    "rank": "रैंक",
     "achievements": "उपलब्धियां",
     "noAchievements": "अभी तक कोई उपलब्धि नहीं",
     "connected": "जुड़ा",
-    "notConnected": "जुड़ा नहीं"
+    "notConnected": "जुड़ा नहीं",
+    "name": "नाम",
+    "cancel": "रद्द करें",
+    "credentials": "क्रेडेंशियल NFTs",
+    "noCredentials": "अभी तक कोई क्रेडेंशियल नहीं। अपनी पहली क्रेडेंशियल पाने के लिए एक कोर्स पूरा करें।",
+    "startLearning": "सीखना शुरू करें",
+    "viewOnExplorer": "Solana Explorer पर देखें",
+    "showAll": "सब दिखाएं",
+    "showLess": "कम दिखाएं"
   },
   "settings": {
     "title": "सेटिंग्स",
@@ -356,10 +375,19 @@
   "certificates": {
     "title": "प्रमाणपत्र",
     "description": "आपके कोर्स पूर्णता प्रमाणपत्र यहाँ दिखाई देंगे।",
+    "empty": "अभी कोई प्रमाणपत्र नहीं। अपना पहला ऑन-चेन प्रमाणपत्र पाने के लिए कोई कोर्स पूरा करें।",
     "emptyTitle": "अभी कोई प्रमाणपत्र नहीं",
     "emptyDescription": "अपना पहला ऑन-चेन प्रमाणपत्र कमाने के लिए कोई कोर्स पूरा करें।",
+    "browseCourses": "कोर्स देखें",
     "goToCourses": "कोर्स देखें",
     "viewDetails": "विवरण देखें",
-    "mintedOn": "मिंट किया गया"
+    "viewOnExplorer": "Solana Explorer पर देखें",
+    "mintedOn": "मिंट किया गया",
+    "mintAddress": "मिंट पता",
+    "notFound": "प्रमाणपत्र नहीं मिला",
+    "certificateOf": "पूर्णता प्रमाणपत्र",
+    "awardedTo": "प्रदान किया गया",
+    "share": "शेयर करें",
+    "download": "PDF डाउनलोड करें"
   }
 }

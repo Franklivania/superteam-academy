@@ -26,8 +26,8 @@ async function hash_token(token: string): Promise<string> {
   const crypto_obj =
     typeof globalThis.crypto !== "undefined"
       ? globalThis.crypto
-      :  
-        (await import("crypto")).webcrypto;
+      :
+      (await import("crypto")).webcrypto;
   const digest = await crypto_obj.subtle.digest("SHA-256", data.buffer as ArrayBuffer);
   const bytes = new Uint8Array(digest);
   return Array.from(bytes)
@@ -113,6 +113,20 @@ export async function find_user_by_email(email: string) {
 }
 
 export async function link_wallet(user_id: string, public_key: string): Promise<void> {
+  const existing = await find_user_by_wallet(public_key);
+  if (existing) {
+    if (existing.id === user_id) {
+      return; 
+    }
+
+    if (existing.email.endsWith("@wallet.local") && !existing.name && !existing.image_url) {
+      await db.delete(users).where(eq(users.id, existing.id));
+      await db.insert(wallets).values({ user_id, public_key });
+      return;
+    }
+
+    throw new Error("Wallet is already linked to another account");
+  }
   await db.insert(wallets).values({ user_id, public_key });
 }
 

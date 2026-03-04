@@ -67,7 +67,10 @@
     "enrollmentError": "Enrollment failed. Connect your wallet first.",
     "noCourses": "No courses found",
     "lessons": "Lessons",
-    "modules": "Modules"
+    "modules": "Modules",
+    "difficulty_beginner": "Beginner",
+    "difficulty_intermediate": "Intermediate",
+    "difficulty_advanced": "Advanced"
   },
   "challenges": {
     "title": "Challenges",
@@ -158,7 +161,9 @@
     "challengeCompletion": "Challenge completed",
     "achievementAward": "Achievement earned",
     "walletStatus": "Wallet status",
-    "achievements": "Achievements"
+    "achievements": "Achievements",
+    "recommendedCourses": "Recommended Courses",
+    "recommendedDescription": "Explore more courses to continue your learning journey."
   },
   "leaderboard": {
     "title": "Leaderboard",
@@ -178,7 +183,11 @@
     "complete": "Mark complete",
     "completed": "Completed",
     "runCode": "Run code",
-    "moduleComplete": "Module completed!"
+    "moduleComplete": "Module completed!",
+    "previous": "Previous",
+    "next": "Next",
+    "moduleOverview": "Module overview",
+    "toggleEditor": "Toggle editor"
   },
   "admin": {
     "label": "Admin",
@@ -331,18 +340,28 @@
     "displayName": "Display name",
     "avatarUrl": "Avatar URL",
     "email": "Email",
+    "name": "Name",
     "role": "Role",
     "wallet": "Wallet",
     "linkedAccounts": "Linked accounts",
-    "save": "Save changes",
+    "save": "Save",
+    "cancel": "Cancel",
     "saved": "Profile updated",
     "xp": "XP",
     "level": "Level",
     "streak": "Streak",
+    "longest": "Longest",
+    "rank": "Rank",
     "achievements": "Achievements",
     "noAchievements": "No achievements yet",
     "connected": "Connected",
-    "notConnected": "Not connected"
+    "notConnected": "Not connected",
+    "credentials": "Credential NFTs",
+    "noCredentials": "No credentials yet. Complete a course to earn your first credential.",
+    "startLearning": "Start learning",
+    "viewOnExplorer": "View on Solana Explorer",
+    "showAll": "Show all",
+    "showLess": "Show less"
   },
   "settings": {
     "title": "Settings",
@@ -357,10 +376,19 @@
   "certificates": {
     "title": "Certificates",
     "description": "Your course completion credentials will appear here.",
+    "empty": "No certificates yet. Complete a course to earn your first on-chain credential.",
     "emptyTitle": "No certificates yet",
     "emptyDescription": "Complete a course to earn your first on-chain certificate.",
+    "browseCourses": "Browse courses",
     "goToCourses": "Browse courses",
     "viewDetails": "View details",
-    "mintedOn": "Minted on"
+    "viewOnExplorer": "View on Solana Explorer",
+    "mintedOn": "Minted on",
+    "mintAddress": "Mint address",
+    "notFound": "Certificate not found",
+    "certificateOf": "Certificate of Completion",
+    "awardedTo": "Awarded to",
+    "share": "Share",
+    "download": "Download PDF"
   }
 }

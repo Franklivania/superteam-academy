@@ -4,11 +4,12 @@ import { require_auth } from "@/lib/api/guard";
 import { api_error, api_success } from "@/lib/api/response";
 import { lesson_complete_body_schema } from "@/lib/validators/lesson";
 import { db } from "@/lib/db";
-import { lesson_progress, wallets } from "@/lib/db/schema";
+import { wallets } from "@/lib/db/schema";
 import { get_enrollment_status } from "@/lib/services/blockchain-service";
 import { record_streak_event } from "@/lib/services/streak-service";
 import { evaluate_and_award_criteria_achievements } from "@/lib/services/achievement-service";
 import { check_rate_limit } from "@/lib/security/rate-limit";
+import { complete_lesson } from "@/lib/services/learning-progress-service";
 
 export async function POST(request: NextRequest): Promise<Response> {
   const result = await require_auth();
@@ -50,25 +51,8 @@ export async function POST(request: NextRequest): Promise<Response> {
 
   const now = new Date();
 
-  // Upsert lesson progress for this user / course / lesson
-  await db
-    .insert(lesson_progress)
-    .values({
-      user_id: session.sub,
-      course_slug,
-      lesson_slug,
-      completed: true,
-      completed_at: now,
-      updated_at: now,
-    })
-    .onConflictDoUpdate({
-      target: [lesson_progress.user_id, lesson_progress.course_slug, lesson_progress.lesson_slug],
-      set: {
-        completed: true,
-        completed_at: now,
-        updated_at: now,
-      },
-    });
+  // Use LearningProgressService facade for lesson completion
+  await complete_lesson(session.sub, course_slug, lesson_slug);
 
   await record_streak_event(session.sub, "lesson_complete", now);
   await evaluate_and_award_criteria_achievements(session.sub);

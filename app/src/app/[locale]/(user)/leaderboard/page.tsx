@@ -34,7 +34,7 @@ export default function LeaderboardPage() {
     : entries;
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-8 px-4">
       <h1 className="text-2xl font-semibold text-foreground">{t("title")}</h1>
 
       <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
