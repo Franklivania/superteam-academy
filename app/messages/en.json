@@ -340,6 +340,7 @@
     "level": "Level",
     "streak": "Streak",
     "achievements": "Achievements",
+    "noAchievements": "No achievements yet",
     "connected": "Connected",
     "notConnected": "Not connected"
   },

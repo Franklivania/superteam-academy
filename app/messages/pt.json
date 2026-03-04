@@ -339,6 +339,7 @@
     "level": "Nível",
     "streak": "Sequência",
     "achievements": "Conquistas",
+    "noAchievements": "Ainda sem conquistas",
     "connected": "Ligado",
     "notConnected": "Não ligado"
   },

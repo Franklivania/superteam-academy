@@ -34,6 +34,16 @@ type ProfileData = {
   leaderboard_rank: number | null;
 };
 
+type AchievementItem = {
+  achievement_id: string;
+  name: string | null;
+  image_url?: string | null;
+  xp_reward: number | null;
+  awarded_at: string | null;
+};
+
+const AWARD_IMAGE_FALLBACK = "/award.webp";
+
 function levelProgress(totalXp: number, level: number): number {
   const nextLevelXp = (level + 1) * (level + 1) * 100;
   const currentLevelFloorXp = level * level * 100;
@@ -53,6 +63,12 @@ export default function ProfilePage() {
   const { data: profile, isPending } = useAPIQuery<ProfileData>({
     queryKey: ["profile"],
     path: "/api/user/profile",
+    enabled: Boolean(session),
+  });
+
+  const { data: achievementsData } = useAPIQuery<{ achievements: AchievementItem[] }>({
+    queryKey: ["achievements"],
+    path: "/api/achievement/user",
     enabled: Boolean(session),
   });
 
@@ -83,6 +99,8 @@ export default function ProfilePage() {
   };
 
   if (!isLoaded || !session) return null;
+
+  const achievements = achievementsData?.achievements ?? [];
 
   return (
     <div className="container mx-auto space-y-8 p-4 md:p-6">
@@ -213,8 +231,50 @@ export default function ProfilePage() {
             <CardHeader>
               <CardTitle className="text-lg">{t("achievements")}</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-xl font-bold">{profile.achievement_count}</p>
+            <CardContent className="space-y-3">
+              <p className="text-xl font-bold">
+                {profile.achievement_count}
+              </p>
+              {achievements.length > 0 ? (
+                <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {achievements
+                    .slice()
+                    .sort(
+                      (a, b) =>
+                        new Date(b.awarded_at ?? 0).getTime() -
+                        new Date(a.awarded_at ?? 0).getTime(),
+                    )
+                    .map((item) => (
+                      <li
+                        key={item.achievement_id}
+                        className="flex items-center gap-3 rounded-none border-2 border-border bg-muted/40 p-2"
+                      >
+                        <div className="relative h-10 w-10 shrink-0 border-2 border-border bg-background">
+                          <Image
+                            src={item.image_url ?? AWARD_IMAGE_FALLBACK}
+                            alt={item.name ?? ""}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="truncate text-xs font-semibold text-foreground">
+                            {item.name ?? item.achievement_id}
+                          </p>
+                          {typeof item.xp_reward === "number" && item.xp_reward > 0 && (
+                            <p className="text-[11px] text-muted-foreground">
+                              {item.xp_reward} XP
+                            </p>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                </ul>
+              ) : (
+                <p className="text-sm text-muted-foreground">
+                  {t("noAchievements")}
+                </p>
+              )}
             </CardContent>
           </Card>
         </>

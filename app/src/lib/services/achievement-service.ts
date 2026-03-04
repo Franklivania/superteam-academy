@@ -15,6 +15,46 @@ import type { AchievementCriteriaType } from "@/lib/db/schema";
 import { get_xp_balance } from "@/lib/services/blockchain-service";
 import { reward_xp_onchain } from "@/lib/services/blockchain-service";
 
+let default_achievements_ensured = false;
+
+async function ensure_default_achievements(): Promise<void> {
+  if (default_achievements_ensured) return;
+
+  // Defensive seeding in case the SQL migration didn't run against the current DATABASE_URL.
+  // Matches 0003_default_achievements.sql.
+  await db
+    .insert(achievements)
+    .values({
+      achievement_id: "registration_congrats",
+      name: "Welcome to Superteam Academy",
+      metadata_uri: "achievement:registration_congrats",
+      image_url: null,
+      xp_reward: 100,
+      supply_cap: null,
+      is_active: true,
+      criteria_type: "registration",
+      criteria_value: null,
+    })
+    .onConflictDoNothing({ target: achievements.achievement_id });
+
+  await db
+    .insert(achievements)
+    .values({
+      achievement_id: "all_accounts_linked",
+      name: "All accounts linked",
+      metadata_uri: "achievement:all_accounts_linked",
+      image_url: null,
+      xp_reward: 300,
+      supply_cap: null,
+      is_active: true,
+      criteria_type: "all_accounts_linked",
+      criteria_value: null,
+    })
+    .onConflictDoNothing({ target: achievements.achievement_id });
+
+  default_achievements_ensured = true;
+}
+
 export async function award_achievement(params: {
   admin_id: string;
   user_id: string;
@@ -145,6 +185,7 @@ async function get_user_criteria_stats(user_id: string): Promise<{
  * Call after lesson complete, challenge submit, or streak update.
  */
 export async function evaluate_and_award_criteria_achievements(user_id: string): Promise<void> {
+  await ensure_default_achievements();
   const stats = await get_user_criteria_stats(user_id);
 
   const rows = await db
