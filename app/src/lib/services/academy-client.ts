@@ -1,5 +1,5 @@
 import * as anchor from "@coral-xyz/anchor";
-import { PublicKey, SystemProgram } from "@solana/web3.js";
+import { Connection, PublicKey, SystemProgram, Transaction, TransactionInstruction } from "@solana/web3.js";
 import { TOKEN_2022_PROGRAM_ID, getAssociatedTokenAddressSync } from "@solana/spl-token";
 
 type Academy_enroll_params = {
@@ -200,26 +200,43 @@ export async function academy_enroll(params: Academy_enroll_params): Promise<str
 /**
  * Build an unsigned enroll transaction for the learner's wallet to sign and send.
  * Returns a base64-encoded serialized transaction.
+ *
+ * NOTE: We build the instruction manually instead of using Anchor's
+ * `program.methods.enroll()` because the IDL uses spec 0.1.0 (Anchor 0.30+)
+ * and the @coral-xyz/anchor 0.32.x client cannot encode instructions from it.
  */
 export async function academy_build_enroll_tx(params: Academy_enroll_params): Promise<string> {
-  const program = get_program();
-  const provider = program.provider as anchor.AnchorProvider;
+  const rpc_url = process.env.NEXT_PUBLIC_SOLANA_RPC;
+  if (!rpc_url) throw new Error("NEXT_PUBLIC_SOLANA_RPC is not configured");
+
+  const connection = new Connection(rpc_url, "confirmed");
   const learner_public_key = new PublicKey(params.learner_public_key);
   const course_pda = derive_course_pda(params.course_id);
   const enrollment_pda = derive_enrollment_pda(params.course_id, learner_public_key);
 
-  const ix = await program.methods
-    .enroll(params.course_id)
-    .accountsPartial({
-      course: course_pda,
-      enrollment: enrollment_pda,
-      learner: learner_public_key,
-      systemProgram: SystemProgram.programId,
-    })
-    .instruction();
+  // ── Encode instruction data ──
+  // Discriminator for "enroll" from the IDL
+  const discriminator = Buffer.from([58, 12, 36, 3, 142, 28, 1, 43]);
+  // Borsh-encode the course_id string: 4-byte LE length + UTF-8 bytes
+  const course_id_bytes = Buffer.from(params.course_id, "utf-8");
+  const len_buf = Buffer.alloc(4);
+  len_buf.writeUInt32LE(course_id_bytes.length, 0);
+  const ix_data = Buffer.concat([discriminator, len_buf, course_id_bytes]);
 
-  const { blockhash } = await provider.connection.getLatestBlockhash("confirmed");
-  const tx = new anchor.web3.Transaction({
+  // ── Build instruction with the same account order as the IDL ──
+  const ix = new TransactionInstruction({
+    programId: PROGRAM_ID,
+    keys: [
+      { pubkey: course_pda, isSigner: false, isWritable: true },
+      { pubkey: enrollment_pda, isSigner: false, isWritable: true },
+      { pubkey: learner_public_key, isSigner: true, isWritable: true },
+      { pubkey: SystemProgram.programId, isSigner: false, isWritable: false },
+    ],
+    data: ix_data,
+  });
+
+  const { blockhash } = await connection.getLatestBlockhash("confirmed");
+  const tx = new Transaction({
     recentBlockhash: blockhash,
     feePayer: learner_public_key,
   }).add(ix);

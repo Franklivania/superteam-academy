@@ -1,17 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { useAPIQuery } from "@/lib/api/useAPI";
 import { Input } from "@/components/ui/input";
-
-type LeaderboardEntry = {
-  rank: number;
-  user_id: string;
-  username?: string;
-  xp: number;
-  level: number;
-};
+import { dummy_leaderboard_data, type LeaderboardEntry } from "@/lib/data/dummy-leaderboard";
 
 export default function LeaderboardPage() {
   const t = useTranslations("leaderboard");
@@ -19,18 +11,16 @@ export default function LeaderboardPage() {
   const [period, set_period] = useState<"24h" | "7d" | "30d" | "all_time">("all_time");
   const [search, set_search] = useState("");
 
-  const { data, isPending, error } = useAPIQuery<{ entries: LeaderboardEntry[] }>({
-    queryKey: ["leaderboard", period],
-    path: `/api/leaderboard?timeframe=${period}&limit=50&offset=0`,
-  });
+  const isPending = false;
+  const error = null;
 
-  const entries = data?.entries ?? [];
+  const entries = dummy_leaderboard_data[period] ?? [];
   const filtered = search
     ? entries.filter(
-        (e) =>
-          e.username?.toLowerCase().includes(search.toLowerCase()) ||
-          e.user_id.toLowerCase().includes(search.toLowerCase()),
-      )
+      (e) =>
+        e.username?.toLowerCase().includes(search.toLowerCase()) ||
+        e.user_id.toLowerCase().includes(search.toLowerCase()),
+    )
     : entries;
 
   return (
@@ -79,9 +69,7 @@ export default function LeaderboardPage() {
       {isPending && (
         <p className="mt-4 text-sm text-muted-foreground">{t_common("loading")}</p>
       )}
-      {error && (
-        <p className="mt-4 text-sm text-destructive">{error.message}</p>
-      )}
+
       {!isPending && !error && filtered.length === 0 && (
         <p className="mt-8 text-muted-foreground">{t("noResults")}</p>
       )}

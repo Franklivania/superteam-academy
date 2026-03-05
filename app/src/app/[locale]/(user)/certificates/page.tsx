@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useAPIQuery } from "@/lib/api/useAPI";
 import { useAuthStore } from "@/store/auth-store";
 import { Link } from "@/i18n/navigation";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,9 +13,20 @@ type Credential = {
   attributes?: Record<string, string | number>;
 };
 
-type ProfileData = {
-  credentials: Credential[];
-};
+const dummy_credentials: Credential[] = [
+  {
+    name: "Intro to Tech Completion",
+    mint: "FB9LmHKu6QoZwj9ZJbYM5KcRUzgCkErSAQfQXbksNJNs",
+    image: "https://cdn.sanity.io/images/18yocufb/production/18be28c9c5f90b887326e549a75543843d2cee3d-1000x584.webp",
+    attributes: { "difficulty": "beginner", "xp": 500, "role": "developer" },
+  },
+  {
+    name: "Solana Bootcamp Master",
+    mint: "2NTkiDt6VgLTs8WytHU4KM9hejCU5zL1eWKyBjS9LEti",
+    image: "https://cdn.sanity.io/images/18yocufb/production/1aeac19ebdb28c11e03c19b22cb7c79eeb135d94-1280x720.jpg",
+    attributes: { "difficulty": "intermediate", "xp": 1200, "track": "rust" },
+  }
+];
 
 const EXPLORER_BASE = "https://explorer.solana.com/address";
 
@@ -24,15 +34,10 @@ export default function CertificatesPage() {
   const t = useTranslations("certificates");
   const session = useAuthStore((s) => s.session);
 
-  const { data: profile, isPending } = useAPIQuery<ProfileData>({
-    queryKey: ["profile"],
-    path: "/api/user/profile",
-    enabled: Boolean(session),
-  });
-
   if (!session) return null;
 
-  const credentials = profile?.credentials ?? [];
+  const isPending = false;
+  const credentials = dummy_credentials;
 
   const cardClass =
     "rounded-none border-2 border-border bg-card shadow-[3px_3px_0_0_hsl(var(--foreground)_/_0.15)]";

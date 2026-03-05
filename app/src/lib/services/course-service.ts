@@ -39,7 +39,8 @@ export type Lesson = {
   slug: string;
   title: string;
   order: number;
-  content: string | null;
+  content: any | null; // Changed to any | null for PortableText
+  lessonVideo?: { url?: string; file_url?: string } | null;
   challenge_id: string | null;
 };
 
@@ -75,7 +76,8 @@ type Sanity_lesson = {
   slug?: { current?: string } | null;
   title?: string | null;
   order?: number | null;
-  content?: string | null;
+  content?: any | null;
+  lessonVideo?: { url?: string | null; file?: { asset?: { url?: string | null } | null } | null } | null;
   challenge_id?: string | null;
 };
 
@@ -130,11 +132,21 @@ type Sanity_challenge_detail = Sanity_challenge_meta & {
 
 function map_sanity_lesson(doc: Sanity_lesson): Lesson {
   const slug = typeof doc.slug === "string" ? doc.slug : (doc.slug?.current ?? "");
+
+  let lessonVideo = null;
+  if (doc.lessonVideo) {
+    lessonVideo = {
+      url: doc.lessonVideo.url ?? undefined,
+      file_url: doc.lessonVideo.file?.asset?.url ?? undefined,
+    };
+  }
+
   return {
     slug,
     title: doc.title ?? slug,
     order: doc.order ?? 0,
     content: doc.content ?? null,
+    lessonVideo,
     challenge_id: doc.challenge_id ?? null,
   };
 }
@@ -219,7 +231,15 @@ function build_course_query(draft: boolean): string {
           "slug": coalesce(slug.current, slug),
           title,
           order,
-          "content": coalesce(pt::text(content), ""),
+          content,
+          lessonVideo {
+            url,
+            "file": {
+              "asset": {
+                "url": file.asset->url
+              }
+            }
+          },
           challenge_id
         }
       }
